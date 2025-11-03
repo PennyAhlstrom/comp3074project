@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary & Accent Colors -->
+    <color name="colorPrimary">#1A1A37</color>       <!-- Deep navy -->
+    <color name="colorPrimaryVariant">#E9EBED</color>  <!-- Light grey variant -->
+    <color name="colorOnPrimary">#EBFAFF</color>     <!-- Text on primary -->
 
-    <color name="blue_nav">#2196F3</color>      <!-- Material blue -->
-    <color name="nav_gray">#A0A0A0</color>      <!-- Soft gray for unselected -->
+    <color name="colorSecondary">#C2EA85</color>     <!-- Soft green -->
+    <color name="colorSecondaryVariant">#C2F0FF</color> <!-- Soft blue -->
+    <color name="colorOnSecondary">#1A1A37</color>   <!-- Text/icons on accents -->
 
+    <!-- Background & Surface -->
+    <!-- <color name="colorBackground">#E9EBED</color> -->    <!-- Light grey for main background -->
+    <color name="colorBackground">#FFFFFF</color>    <!-- Light grey for main background -->
+    <color name="colorSurface">#EBFAFF</color>       <!-- Light blue for cards -->
+    <color name="colorOnBackground">#1A1A37</color>  <!-- Dark navy for text/icons -->
 </resources>
