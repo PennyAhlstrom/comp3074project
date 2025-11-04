@@ -62,6 +62,46 @@
                     android:layout_marginBottom="8dp" />
 
                 <TextView
+                    android:id="@+id/textTaskType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type: Assignment"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorOnSecondary"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/textTaskWorth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Worth: 15%"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorOnSecondary"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/textTaskMark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mark Achieved: 13.5%"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorOnSecondary"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/textTaskBonus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bonus Task: No"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorOnSecondary"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
                     android:id="@+id/textTaskPriority"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,7 +145,7 @@
                     android:id="@+id/textTaskNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Notes: Submit PDF version on Blackboard."
+                    android:text="Notes: Submit PDF on Blackboard."
                     android:textSize="16sp"
                     android:textColor="@color/colorOnSecondary"
                     android:layout_marginHorizontal="12dp"

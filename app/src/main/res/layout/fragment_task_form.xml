@@ -61,6 +61,98 @@
                 android:entries="@array/sample_courses" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Type and Bonus Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <!-- Type Dropdown -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Type"
+                app:boxStrokeColor="@color/colorOnSecondary">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdownType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/colorOnSecondary"
+                    android:textSize="16sp"
+                    android:entries="@array/task_types" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Small Spacer -->
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
+
+            <!-- Bonus Toggle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bonus"
+                    android:textColor="@color/colorOnSecondary"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchBonus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Worth (%) -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Percentage Worth (%)"
+            app:boxStrokeColor="@color/colorOnSecondary"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputWorth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="16sp"
+                tools:text="15" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Mark Achieved - Removed this for Screenshot so it wouldn't be too long to view the entire form-->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mark Achieved (%)"
+            app:boxStrokeColor="@color/colorOnSecondary"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputMark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="16sp"
+                tools:text="85" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- Priority Dropdown -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
