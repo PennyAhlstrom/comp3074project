@@ -1,0 +1,19 @@
+<resources>
+    <string-array name="priority_levels">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+    <string-array name="sample_tasks">
+        <item>Study Session</item>
+        <item>Project Deadline</item>
+        <item>Exam</item>
+    </string-array>
+
+    <string-array name="sample_courses">
+        <item>COMP3074</item>
+        <item>COMP3095</item>
+        <item>COMP3123</item>
+    </string-array>
+</resources>
