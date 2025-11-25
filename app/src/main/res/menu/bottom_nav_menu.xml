@@ -17,14 +17,14 @@
         android:title="Tasks" />
 
     <item
-        android:id="@+id/navigation_back"
-        android:icon="@drawable/ic_arrow_back"
-        android:title="Back" />
+        android:id="@+id/navigation_reminders"
+        android:icon="@drawable/ic_priority_high"
+        android:title="Reminders" />
 
     <item
-        android:id="@+id/navigation_forward"
-        android:icon="@drawable/ic_arrow_forward"
-        android:title="Forward" />
+        android:id="@+id/navigation_grades"
+        android:icon="@drawable/ic_insights"
+        android:title="Grades" />
 
     <item
         android:id="@+id/navigation_profile"
