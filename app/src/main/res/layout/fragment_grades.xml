@@ -1,113 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.grades.GradesFragment"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Header -->
-        <TextView
-            android:id="@+id/gradesTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grades"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorOnSecondary"
-            android:layout_marginBottom="16dp" />
-
-        <!-- List of Grade Cards -->
-        <LinearLayout
-            android:id="@+id/gradesListContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:showDividers="none">
-
-            <!-- Example Grade Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/exampleGradeCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="?attr/colorSurface"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <!-- Course Name -->
-                    <TextView
-                        android:id="@+id/textGradeCourseName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mobile App Development"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorOnSecondary" />
-
-                    <!-- Course Code -->
-                    <TextView
-                        android:id="@+id/textGradeCourseCode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="COMP3074"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorOnSecondary"
-                        android:textStyle="bold"
-                        android:layout_marginTop="4dp" />
-
-                    <!-- Grade Info -->
-                    <TextView
-                        android:id="@+id/textGradeEarned"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Marks Earned: 26 / 30"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorOnSecondary"
-                        android:layout_marginTop="10dp" />
-
-                    <TextView
-                        android:id="@+id/textGradeProjected"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Projected Grade: 86.7%"
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorOnSecondary"
-                        android:layout_marginTop="4dp" />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Additional grade cards will be added dynamically -->
-        </LinearLayout>
-
-        <!-- Add New Grade Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddGrade"
-            style="@style/Widget.MyApp.Button.Primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add New Grade"
-            android:layout_marginTop="16dp"
-            app:icon="@drawable/ic_add_circle"
-            app:iconGravity="textEnd"
-            app:iconPadding="8dp" />
-    </LinearLayout>
-</ScrollView>
+        android:text="Grades Screen"
+        android:textSize="24sp"
+        android:layout_gravity="center" />
+</FrameLayout>

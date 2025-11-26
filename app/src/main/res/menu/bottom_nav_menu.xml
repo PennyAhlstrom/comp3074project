@@ -3,33 +3,22 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home"
         android:title="Home" />
 
     <item
-        android:id="@+id/navigation_courses"
-        android:icon="@drawable/ic_archive"
-        android:title="Courses" />
-
-    <item
-        android:id="@+id/navigation_tasks"
-        android:icon="@drawable/ic_assignment"
-        android:title="Tasks" />
-
-    <item
         android:id="@+id/navigation_reminders"
-        android:icon="@drawable/ic_priority_high"
         android:title="Reminders" />
 
     <item
-        android:id="@+id/navigation_grades"
-        android:icon="@drawable/ic_insights"
-        android:title="Grades" />
+        android:id="@+id/navigation_tasks"
+        android:title="Tasks" />
 
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_account"
-        android:title="Profile" />
+        android:id="@+id/navigation_courses"
+        android:title="Courses" />
 
+    <item
+        android:id="@+id/navigation_grades"
+        android:title="Grades" />
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.comp3074project;
+package com.example.comp3074_project;
 
 import org.junit.Test;
 
