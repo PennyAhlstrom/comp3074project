@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-// This fragment shows tasks screen
+//  the Tasks screen UI
 public class TasksFragment extends Fragment {
 
     @Nullable
@@ -17,6 +17,7 @@ public class TasksFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //  Tasks screen layout
         return inflater.inflate(R.layout.fragment_tasks, container, false);
     }
 }

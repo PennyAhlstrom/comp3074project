@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-// This fragment shows courses screen
+// This fragment displays the Courses screen UI
 public class CoursesFragment extends Fragment {
 
     @Nullable
@@ -17,6 +17,7 @@ public class CoursesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        // Inflate the Courses screen layout
         return inflater.inflate(R.layout.fragment_courses, container, false);
     }
 }

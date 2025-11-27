@@ -5,38 +5,43 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_home">
 
+    <!-- Home screen -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.comp3074project.HomeFragment"
         android:label="Home" />
 
+    <!-- Reminders screen -->
     <fragment
         android:id="@+id/navigation_reminders"
         android:name="com.example.comp3074project.RemindersFragment"
         android:label="Reminders">
 
-        <!-- Action from Reminders to AddReminder -->
+        <!-- Navigation action to open Add Reminder screen -->
         <action
             android:id="@+id/action_navigation_reminders_to_addReminderFragment"
             app:destination="@id/addReminderFragment" />
     </fragment>
 
+    <!-- Tasks screen (main tasks UI) -->
     <fragment
         android:id="@+id/navigation_tasks"
         android:name="com.example.comp3074project.TasksFragment"
         android:label="Tasks" />
 
+    <!-- Courses screen -->
     <fragment
         android:id="@+id/navigation_courses"
         android:name="com.example.comp3074project.CoursesFragment"
         android:label="Courses" />
 
+    <!-- Grades screen -->
     <fragment
         android:id="@+id/navigation_grades"
         android:name="com.example.comp3074project.GradesFragment"
         android:label="Grades" />
 
-    <!-- Add Reminder detail screen -->
+    <!-- Add Reminder screen (opened ONLY from RemindersFragment) -->
     <fragment
         android:id="@+id/addReminderFragment"
         android:name="com.example.comp3074project.AddReminderFragment"

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-// This fragment shows grades screen
+// This fragment displays the Grades screen UI
 public class GradesFragment extends Fragment {
 
     @Nullable
@@ -17,6 +17,7 @@ public class GradesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        // Inflate the Grades screen layout
         return inflater.inflate(R.layout.fragment_grades, container, false);
     }
 }
