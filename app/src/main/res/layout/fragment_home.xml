@@ -66,7 +66,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:text="View All"
-                    android:backgroundTint="#B7E6FF"
+                    android:backgroundTint="#BDE8FF"
                     android:textColor="#1E2840"
                     android:textAllCaps="false"
                     android:layout_marginEnd="8dp" />
@@ -128,7 +128,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:text="View All"
-                    android:backgroundTint="#B7E6FF"
+                    android:backgroundTint="#BDE8FF"
                     android:textColor="#1E2840"
                     android:textAllCaps="false"
                     android:layout_marginEnd="8dp" />
@@ -190,7 +190,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:text="View All"
-                    android:backgroundTint="#B7E6FF"
+                    android:backgroundTint="#BDE8FF"
                     android:textColor="#1E2840"
                     android:textAllCaps="false"
                     android:layout_marginEnd="8dp" />
@@ -252,7 +252,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:text="View All"
-                    android:backgroundTint="#B7E6FF"
+                    android:backgroundTint="#BDE8FF"
                     android:textColor="#1E2840"
                     android:textAllCaps="false"
                     android:layout_marginEnd="8dp" />

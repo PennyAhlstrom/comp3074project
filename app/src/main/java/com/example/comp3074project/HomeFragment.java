@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
-// This fragment shows the home screen
+// This fragment shows the Home screen and handles navigation shortcuts
 public class HomeFragment extends Fragment {
 
     @Nullable
@@ -18,5 +21,57 @@ public class HomeFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // NavController for navigation actions
+        NavController navController = Navigation.findNavController(view);
+
+        // ---------- REMINDERS ----------
+        Button btnRemindersViewAll = view.findViewById(R.id.btn_reminders_view_all);
+        btnRemindersViewAll.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_reminders)
+        );
+
+        Button btnRemindersAddNew = view.findViewById(R.id.btn_reminders_add_new);
+        btnRemindersAddNew.setOnClickListener(v ->
+                navController.navigate(R.id.addReminderFragment)
+        );
+
+        // ---------- TASKS ----------
+        Button btnTasksViewAll = view.findViewById(R.id.btn_tasks_view_all);
+        btnTasksViewAll.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_tasks)
+        );
+
+        Button btnTasksAddNew = view.findViewById(R.id.btn_tasks_add_new);
+        btnTasksAddNew.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_tasks) // No add-task screen yet
+        );
+
+        // ---------- COURSES ----------
+        Button btnCoursesViewAll = view.findViewById(R.id.btn_courses_view_all);
+        btnCoursesViewAll.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_courses)
+        );
+
+        Button btnCoursesAddNew = view.findViewById(R.id.btn_courses_add_new);
+        btnCoursesAddNew.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_courses) // No add-course screen yet
+        );
+
+        // ---------- GRADES ----------
+        Button btnGradesViewAll = view.findViewById(R.id.btn_grades_view_all);
+        btnGradesViewAll.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_grades)
+        );
+
+        Button btnGradesAddNew = view.findViewById(R.id.btn_grades_add_new);
+        btnGradesAddNew.setOnClickListener(v ->
+                navController.navigate(R.id.navigation_grades) // No add-grade screen yet
+        );
     }
 }
