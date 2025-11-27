@@ -13,7 +13,13 @@
     <fragment
         android:id="@+id/navigation_reminders"
         android:name="com.example.comp3074project.RemindersFragment"
-        android:label="Reminders" />
+        android:label="Reminders">
+
+        <!-- Action from Reminders to AddReminder -->
+        <action
+            android:id="@+id/action_navigation_reminders_to_addReminderFragment"
+            app:destination="@id/addReminderFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_tasks"
@@ -29,5 +35,11 @@
         android:id="@+id/navigation_grades"
         android:name="com.example.comp3074project.GradesFragment"
         android:label="Grades" />
+
+    <!-- Add Reminder detail screen -->
+    <fragment
+        android:id="@+id/addReminderFragment"
+        android:name="com.example.comp3074project.AddReminderFragment"
+        android:label="Add Reminder" />
 
 </navigation>
