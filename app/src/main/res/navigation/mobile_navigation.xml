@@ -5,26 +5,31 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_home">
 
+    <!-- Home tab destination -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.comp3074project.HomeFragment"
         android:label="Home" />
 
+    <!-- Reminders tab destination -->
     <fragment
         android:id="@+id/navigation_reminders"
         android:name="com.example.comp3074project.RemindersFragment"
         android:label="Reminders" />
 
+    <!-- Tasks tab destination -->
     <fragment
         android:id="@+id/navigation_tasks"
         android:name="com.example.comp3074project.TasksFragment"
         android:label="Tasks" />
 
+    <!-- Courses tab destination -->
     <fragment
         android:id="@+id/navigation_courses"
         android:name="com.example.comp3074project.CoursesFragment"
         android:label="Courses" />
 
+    <!-- Grades tab destination -->
     <fragment
         android:id="@+id/navigation_grades"
         android:name="com.example.comp3074project.GradesFragment"

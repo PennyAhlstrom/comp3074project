@@ -1,4 +1,4 @@
-package com.example.comp3074_project;
+package com.example.comp3074project;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

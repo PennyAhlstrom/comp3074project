@@ -1,12 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home Screen"
-        android:textSize="24sp"
-        android:layout_gravity="center" />
-</FrameLayout>
+        android:orientation="vertical">
+
+        <!-- ClassMate Header -->
+        <TextView
+            android:id="@+id/tvTitleClassMate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ClassMate"
+            android:textColor="#1E2840"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="16dp" />
+
+        <!-- REMINDERS CARD -->
+        <LinearLayout
+            android:id="@+id/card_reminders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#E7F7FF"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/icon_reminders"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/outline_add_alert_24"
+                app:tint="#1E2840" />
+
+            <TextView
+                android:id="@+id/tvReminders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reminders"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#1E2840"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_reminders_view_all"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="View All"
+                    android:backgroundTint="#B7E6FF"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btn_reminders_add_new"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="Add New"
+                    android:backgroundTint="#C8F574"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- TASKS CARD -->
+        <LinearLayout
+            android:id="@+id/card_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E7F7FF"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/icon_tasks"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/outline_checklist_rtl_24"
+                app:tint="#1E2840" />
+
+            <TextView
+                android:id="@+id/tvTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tasks"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#1E2840"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_tasks_view_all"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="View All"
+                    android:backgroundTint="#B7E6FF"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btn_tasks_add_new"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="Add New"
+                    android:backgroundTint="#C8F574"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- COURSES CARD -->
+        <LinearLayout
+            android:id="@+id/card_courses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#E7F7FF"
+            android:padding="16dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/icon_courses"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/outline_book_5_24"
+                app:tint="#1E2840" />
+
+            <TextView
+                android:id="@+id/tvCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Courses"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#1E2840"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_courses_view_all"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="View All"
+                    android:backgroundTint="#B7E6FF"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btn_courses_add_new"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="Add New"
+                    android:backgroundTint="#C8F574"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- GRADES CARD -->
+        <LinearLayout
+            android:id="@+id/card_grades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E7F7FF"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/icon_grades"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/outline_license_24"
+                app:tint="#1E2840" />
+
+            <TextView
+                android:id="@+id/tvGrades"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Grades"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#1E2840"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_grades_view_all"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="View All"
+                    android:backgroundTint="#B7E6FF"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btn_grades_add_new"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="Add New"
+                    android:backgroundTint="#C8F574"
+                    android:textColor="#1E2840"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
