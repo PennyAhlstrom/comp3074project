@@ -1,0 +1,23 @@
+package com.example.comp3074project;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+//  the Tasks screen UI
+public class TasksFragment extends Fragment {
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        //  Tasks screen layout
+        return inflater.inflate(R.layout.fragment_tasks, container, false);
+    }
+}
