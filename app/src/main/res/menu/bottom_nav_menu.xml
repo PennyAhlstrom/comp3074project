@@ -3,33 +3,29 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/title_home" />
 
-    <item
-        android:id="@+id/navigation_courses"
-        android:icon="@drawable/ic_archive"
-        android:title="Courses" />
 
-    <item
-        android:id="@+id/navigation_tasks"
-        android:icon="@drawable/ic_assignment"
-        android:title="Tasks" />
 
     <item
         android:id="@+id/navigation_reminders"
-        android:icon="@drawable/ic_priority_high"
-        android:title="Reminders" />
+        android:icon="@drawable/outline_add_alert_24"
+        android:title="@string/title_reminders"/>
+
+    <item
+        android:id="@+id/navigation_tasks"
+        android:icon="@drawable/outline_checklist_rtl_24"
+        android:title="@string/title_tasks" />
+
+    <item
+        android:id="@+id/navigation_courses"
+        android:icon="@drawable/outline_book_5_24"
+        android:title="@string/title_courses" />
 
     <item
         android:id="@+id/navigation_grades"
-        android:icon="@drawable/ic_insights"
-        android:title="Grades" />
-
-    <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_account"
-        android:title="Profile" />
-
+        android:icon="@drawable/outline_license_24"
+        android:title="@string/title_grades" />
 
 </menu>

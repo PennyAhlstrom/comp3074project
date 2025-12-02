@@ -1,16 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary & Accent Colors -->
-    <color name="colorPrimary">#1A1A37</color>       <!-- Deep navy -->
-    <color name="colorPrimaryVariant">#E9EBED</color>  <!-- Light grey variant -->
-    <color name="colorOnPrimary">#EBFAFF</color>     <!-- Text on primary -->
-
-    <color name="colorSecondary">#C2EA85</color>     <!-- Soft green -->
-    <color name="colorSecondaryVariant">#C2F0FF</color> <!-- Soft blue -->
-    <color name="colorOnSecondary">#1A1A37</color>   <!-- Text/icons on accents -->
-
-    <!-- Background & Surface -->
-    <!-- <color name="colorBackground">#E9EBED</color> -->    <!-- Light grey for main background -->
-    <color name="colorBackground">#FFFFFF</color>    <!-- Light grey for main background -->
-    <color name="colorSurface">#EBFAFF</color>       <!-- Light blue for cards -->
-    <color name="colorOnBackground">#1A1A37</color>  <!-- Dark navy for text/icons -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

@@ -1,113 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.grades.GradesFragment"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <!-- Header -->
-        <TextView
-            android:id="@+id/gradesTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grades"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorOnSecondary"
-            android:layout_marginBottom="16dp" />
-
-        <!-- List of Grade Cards -->
         <LinearLayout
-            android:id="@+id/gradesListContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:showDividers="none">
+            android:orientation="vertical">
 
-            <!-- Example Grade Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/exampleGradeCard"
+            <!-- Header section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#F97316"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvGradesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grades"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvGradesSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 recorded grades"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <!-- Content section -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="?attr/colorSurface"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:orientation="vertical"
+                android:padding="16dp">
 
+                <!-- Main course grade card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:background="#FB923C"
+                    android:padding="16dp"
+                    android:elevation="2dp"
+                    android:layout_marginBottom="16dp">
 
-                    <!-- Course Name -->
+                    <!-- Course code and name -->
                     <TextView
-                        android:id="@+id/textGradeCourseName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mobile App Development"
-                        android:textSize="18sp"
+                        android:text="COMP2139"
+                        android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorOnSecondary" />
+                        android:textColor="@android:color/white" />
 
-                    <!-- Course Code -->
                     <TextView
-                        android:id="@+id/textGradeCourseCode"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="COMP3074"
+                        android:layout_marginTop="2dp"
+                        android:text="Database Management"
                         android:textSize="14sp"
-                        android:textColor="@color/colorOnSecondary"
-                        android:textStyle="bold"
-                        android:layout_marginTop="4dp" />
+                        android:textColor="@android:color/white" />
 
-                    <!-- Grade Info -->
+                    <!-- Current average -->
                     <TextView
-                        android:id="@+id/textGradeEarned"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Marks Earned: 26 / 30"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorOnSecondary"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="16dp"
+                        android:text="Current Average"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white" />
 
                     <TextView
-                        android:id="@+id/textGradeProjected"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Projected Grade: 86.7%"
+                        android:layout_marginTop="4dp"
+                        android:text="88.0%"
+                        android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorOnSecondary"
-                        android:layout_marginTop="4dp" />
+                        android:textColor="@android:color/white" />
+
+                    <!-- Explanation line -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Based on 25% of final grade"
+                        android:textSize="13sp"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+                <!-- Individual assessment card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:elevation="2dp">
+
+                    <!-- Assessment title and grade -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Midterm Exam"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#111827" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="88%"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#DC2626" />
+                    </LinearLayout>
+
+                    <!-- Assessment type and weight -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Type: Exam  •  Worth 25%"
+                        android:textSize="14sp"
+                        android:textColor="#4B5563" />
+
+                    <!-- Feedback -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Feedback: Great performance!"
+                        android:textSize="14sp"
+                        android:textColor="#4B5563" />
 
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Additional grade cards will be added dynamically -->
+            </LinearLayout>
+
         </LinearLayout>
 
-        <!-- Add New Grade Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddGrade"
-            style="@style/Widget.MyApp.Button.Primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add New Grade"
-            android:layout_marginTop="16dp"
-            app:icon="@drawable/ic_add_circle"
-            app:iconGravity="textEnd"
-            app:iconPadding="8dp" />
-    </LinearLayout>
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>
