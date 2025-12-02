@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
 
         Button btnCoursesAddNew = view.findViewById(R.id.btn_courses_add_new);
         btnCoursesAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.navigation_courses) // No add-course screen yet
+                navController.navigate(R.id.addCourseFragment) // No add-course screen yet
         );
 
         // ---------- GRADES ----------
