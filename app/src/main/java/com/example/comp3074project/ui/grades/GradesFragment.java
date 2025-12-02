@@ -1,4 +1,4 @@
-package com.example.comp3074project;
+package com.example.comp3074project.ui.grades;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.comp3074project.R;
 
 // This fragment displays the Grades screen UI
 public class GradesFragment extends Fragment {

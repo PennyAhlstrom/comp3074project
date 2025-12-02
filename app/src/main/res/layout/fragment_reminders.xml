@@ -37,7 +37,7 @@
                     android:id="@+id/tvActiveReminders"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3 active reminders"
+                    android:text="0 active reminders"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:layout_marginTop="4dp" />
@@ -50,70 +50,14 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Reminder card -->
-                <LinearLayout
+                <!-- RecyclerView replaces static reminder card -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewReminders"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#E7F7FF"
-                    android:padding="16dp"
-                    android:elevation="4dp"
-                    android:layout_marginBottom="24dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Midterm Review"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="#1E2840" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="High"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"
-                            android:background="#FFE5E5"
-                            android:textColor="#D93025" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Task: Study Chapters 1–5   ·   Course: COMP3074"
-                        android:textSize="14sp"
-                        android:textColor="#1E2840" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Priority: High"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="#1E2840" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Alert: Oct 21, 2025  •  9:00 AM"
-                        android:textSize="14sp"
-                        android:textColor="#1E2840" />
-                </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clipToPadding="false"
+                    android:paddingBottom="16dp" />
 
                 <!-- Add new reminder button -->
                 <Button

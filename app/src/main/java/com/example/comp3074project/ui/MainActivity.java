@@ -1,4 +1,4 @@
-package com.example.comp3074project;
+package com.example.comp3074project.ui;
 
 import android.os.Bundle;
 
@@ -7,6 +7,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.comp3074project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

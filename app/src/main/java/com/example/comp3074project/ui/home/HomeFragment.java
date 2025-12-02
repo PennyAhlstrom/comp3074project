@@ -1,4 +1,4 @@
-package com.example.comp3074project;
+package com.example.comp3074project.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.example.comp3074project.R;
 
 // This fragment shows the Home screen and handles navigation shortcuts
 public class HomeFragment extends Fragment {

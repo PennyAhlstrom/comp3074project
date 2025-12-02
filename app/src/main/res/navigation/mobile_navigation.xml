@@ -8,31 +8,31 @@
     <!-- Home tab destination -->
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.comp3074project.HomeFragment"
+        android:name="com.example.comp3074project.ui.home.HomeFragment"
         android:label="Home" />
 
     <!-- Reminders tab destination -->
     <fragment
         android:id="@+id/navigation_reminders"
-        android:name="com.example.comp3074project.RemindersFragment"
+        android:name="com.example.comp3074project.ui.reminders.RemindersFragment"
         android:label="Reminders" />
 
     <!-- Tasks tab destination -->
     <fragment
         android:id="@+id/navigation_tasks"
-        android:name="com.example.comp3074project.TasksFragment"
+        android:name="com.example.comp3074project.ui.tasks.TasksFragment"
         android:label="Tasks" />
 
     <!-- Courses tab destination -->
     <fragment
         android:id="@+id/navigation_courses"
-        android:name="com.example.comp3074project.CoursesFragment"
+        android:name="com.example.comp3074project.ui.courses.CoursesFragment"
         android:label="Courses" />
 
     <!-- Grades tab destination -->
     <fragment
         android:id="@+id/navigation_grades"
-        android:name="com.example.comp3074project.GradesFragment"
+        android:name="com.example.comp3074project.ui.grades.GradesFragment"
         android:label="Grades" />
 
 </navigation>
