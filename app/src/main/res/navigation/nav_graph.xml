@@ -5,46 +5,54 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_home">
 
-    <!-- Home screen -->
+    <!-- Home -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.comp3074project.ui.home.HomeFragment"
         android:label="Home" />
 
-    <!-- Reminders screen -->
+    <!-- Reminders -->
     <fragment
         android:id="@+id/navigation_reminders"
         android:name="com.example.comp3074project.ui.reminders.RemindersFragment"
         android:label="Reminders">
-
-        <!-- Navigation action to open Add Reminder screen -->
         <action
             android:id="@+id/action_navigation_reminders_to_addReminderFragment"
             app:destination="@id/addReminderFragment" />
     </fragment>
 
-    <!-- Tasks screen (main tasks UI) -->
+    <!-- Tasks -->
     <fragment
         android:id="@+id/navigation_tasks"
         android:name="com.example.comp3074project.ui.tasks.TasksFragment"
-        android:label="Tasks" />
+        android:label="Tasks">
+        <action
+            android:id="@+id/action_navigation_tasks_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
 
-    <!-- Courses screen -->
+    <!-- Courses -->
     <fragment
         android:id="@+id/navigation_courses"
         android:name="com.example.comp3074project.ui.courses.CoursesFragment"
         android:label="Courses" />
 
-    <!-- Grades screen -->
+    <!-- Grades -->
     <fragment
         android:id="@+id/navigation_grades"
         android:name="com.example.comp3074project.ui.grades.GradesFragment"
         android:label="Grades" />
 
-    <!-- Add Reminder screen (opened ONLY from RemindersFragment) -->
+    <!-- Add Reminder -->
     <fragment
         android:id="@+id/addReminderFragment"
         android:name="com.example.comp3074project.ui.reminders.AddReminderFragment"
         android:label="Add Reminder" />
+
+    <!-- Add Task -->
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.comp3074project.ui.tasks.AddTaskFragment"
+        android:label="Add Task" />
 
 </navigation>

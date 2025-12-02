@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
         Button btnTasksAddNew = view.findViewById(R.id.btn_tasks_add_new);
         btnTasksAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.navigation_tasks) // No add-task screen yet
+                navController.navigate(R.id.addTaskFragment) // No add-task screen yet
         );
 
         // ---------- COURSES ----------
