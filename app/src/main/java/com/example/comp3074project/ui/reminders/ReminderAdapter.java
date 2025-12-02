@@ -29,21 +29,31 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
     @Override
     public void onBindViewHolder(@NonNull ReminderViewHolder holder, int position) {
         ReminderEntity reminder = reminders.get(position);
-        holder.tvTitle.setText(reminder.title);
-        holder.tvTask.setText(reminder.associatedTask);
-        holder.tvCourse.setText(reminder.course);
-        holder.tvPriority.setText(reminder.priority);
-        holder.tvDateTime.setText(reminder.alertDate + " " + reminder.alertTime);
+
+        holder.tvTitle.setText(reminder.title != null ? reminder.title : "");
+        holder.tvTask.setText(reminder.associatedTask != null ? reminder.associatedTask : "");
+        holder.tvCourse.setText(reminder.course != null ? reminder.course : "");
+        holder.tvPriority.setText(reminder.priority != null ? reminder.priority : "");
+
+        String dateTime = "";
+        if (reminder.alertDate != null && !reminder.alertDate.isEmpty()) {
+            dateTime += reminder.alertDate;
+        }
+        if (reminder.alertTime != null && !reminder.alertTime.isEmpty()) {
+            dateTime += " " + reminder.alertTime;
+        }
+        holder.tvDateTime.setText(!dateTime.isEmpty() ? dateTime : "--:--");
+
         holder.tvNote.setText(reminder.note != null ? reminder.note : "");
     }
 
     @Override
     public int getItemCount() {
-        return reminders.size();
+        return reminders != null ? reminders.size() : 0;
     }
 
     public void setReminders(List<ReminderEntity> reminders) {
-        this.reminders = reminders;
+        this.reminders = reminders != null ? reminders : new ArrayList<>();
         notifyDataSetChanged();
     }
 

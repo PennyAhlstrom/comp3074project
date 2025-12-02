@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ public class RemindersFragment extends Fragment {
 
     private ReminderViewModel reminderViewModel;
     private ReminderAdapter adapter;
+    private TextView tvActiveReminders;
 
     public RemindersFragment() {
         // Required empty public constructor
@@ -43,6 +45,8 @@ public class RemindersFragment extends Fragment {
         adapter = new ReminderAdapter();
         recyclerView.setAdapter(adapter);
 
+        tvActiveReminders = view.findViewById(R.id.tvActiveReminders);
+
         reminderViewModel = new ViewModelProvider(this).get(ReminderViewModel.class);
 
         // Observe LiveData from ViewModel
@@ -50,6 +54,12 @@ public class RemindersFragment extends Fragment {
     }
 
     private void updateUI(List<ReminderEntity> reminders) {
+        // Update RecyclerView
         adapter.setReminders(reminders);
+
+        // Update active reminders count
+        if (tvActiveReminders != null) {
+            tvActiveReminders.setText(reminders.size() + " active reminder" + (reminders.size() != 1 ? "s" : ""));
+        }
     }
 }
