@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
         Button btnTasksAddNew = view.findViewById(R.id.btn_tasks_add_new);
         btnTasksAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.addTaskFragment) // No add-task screen yet
+                navController.navigate(R.id.addTaskFragment)
         );
 
         // ---------- COURSES ----------
@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
 
         Button btnCoursesAddNew = view.findViewById(R.id.btn_courses_add_new);
         btnCoursesAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.addCourseFragment) // No add-course screen yet
+                navController.navigate(R.id.addCourseFragment)
         );
 
         // ---------- GRADES ----------
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
 
         Button btnGradesAddNew = view.findViewById(R.id.btn_grades_add_new);
         btnGradesAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.navigation_grades) // No add-grade screen yet
+                navController.navigate(R.id.addGradeFragment) // Updated to navigate to AddGradeFragment
         );
     }
 }

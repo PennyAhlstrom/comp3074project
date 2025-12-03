@@ -21,11 +21,14 @@
             app:destination="@id/addReminderFragment" />
     </fragment>
 
-    <!-- Add Reminder -->
     <fragment
         android:id="@+id/addReminderFragment"
         android:name="com.example.comp3074project.ui.reminders.AddReminderFragment"
-        android:label="Add Reminder" />
+        android:label="Add Reminder">
+        <action
+            android:id="@+id/action_addReminderFragment_to_navigation_reminders"
+            app:destination="@id/navigation_reminders" />
+    </fragment>
 
     <!-- Tasks -->
     <fragment
@@ -37,29 +40,29 @@
             app:destination="@id/addTaskFragment" />
     </fragment>
 
-    <!-- Add Task -->
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.example.comp3074project.ui.tasks.AddTaskFragment"
-        android:label="Add Task" />
+        android:label="Add Task">
+        <action
+            android:id="@+id/action_addTaskFragment_to_navigation_tasks"
+            app:destination="@id/navigation_tasks" />
+    </fragment>
 
     <!-- Courses -->
     <fragment
         android:id="@+id/navigation_courses"
         android:name="com.example.comp3074project.ui.courses.CoursesFragment"
         android:label="Courses">
-        <!-- Action: CoursesFragment -> AddCourseFragment -->
         <action
             android:id="@+id/action_navigation_courses_to_addCourseFragment"
             app:destination="@id/addCourseFragment" />
     </fragment>
 
-    <!-- Add Course -->
     <fragment
         android:id="@+id/addCourseFragment"
         android:name="com.example.comp3074project.ui.courses.AddCourseFragment"
         android:label="Add Course">
-        <!-- Action: AddCourseFragment -> CoursesFragment -->
         <action
             android:id="@+id/action_addCourseFragment_to_navigation_courses"
             app:destination="@id/navigation_courses" />
@@ -69,6 +72,19 @@
     <fragment
         android:id="@+id/navigation_grades"
         android:name="com.example.comp3074project.ui.grades.GradesFragment"
-        android:label="Grades" />
+        android:label="Grades">
+        <action
+            android:id="@+id/action_navigation_grades_to_addGradeFragment"
+            app:destination="@id/addGradeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addGradeFragment"
+        android:name="com.example.comp3074project.ui.grades.AddGradeFragment"
+        android:label="Add Grade">
+        <action
+            android:id="@+id/action_addGradeFragment_to_navigation_grades"
+            app:destination="@id/navigation_grades" />
+    </fragment>
 
 </navigation>

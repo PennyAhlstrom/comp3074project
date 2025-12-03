@@ -9,17 +9,22 @@ import androidx.room.RoomDatabase;
 import com.example.comp3074project.dao.CourseDao;
 import com.example.comp3074project.dao.ReminderDao;
 import com.example.comp3074project.dao.TaskDao;
+import com.example.comp3074project.dao.GradeDao;
 import com.example.comp3074project.entity.CourseEntity;
 import com.example.comp3074project.entity.ReminderEntity;
 import com.example.comp3074project.entity.TaskEntity;
+import com.example.comp3074project.entity.GradeEntity;
 
-@Database(entities = {ReminderEntity.class, TaskEntity.class, CourseEntity.class}, version = 3) // increment version
+@Database(entities = {ReminderEntity.class, TaskEntity.class, CourseEntity.class, GradeEntity.class}, version = 4) // increment version
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ReminderDao reminderDao();
     public abstract TaskDao taskDao();  // <-- added TaskDao
 
     public abstract CourseDao courseDao();
+
+    public abstract GradeDao gradeDao();      // <-- add DAO
+
 
     private static volatile AppDatabase INSTANCE;
 
