@@ -53,11 +53,19 @@
         android:id="@+id/navigation_tasks"
         android:name="com.example.comp3074project.ui.tasks.TasksFragment"
         android:label="Tasks">
+
+        <!-- Navigate to Add Task -->
         <action
             android:id="@+id/action_navigation_tasks_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
+
+        <!-- Navigate to Edit Task -->
+        <action
+            android:id="@+id/action_navigation_tasks_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
     </fragment>
 
+    <!-- Add Task Fragment -->
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="com.example.comp3074project.ui.tasks.AddTaskFragment"
@@ -65,6 +73,16 @@
         <action
             android:id="@+id/action_addTaskFragment_to_navigation_tasks"
             app:destination="@id/navigation_tasks" />
+    </fragment>
+
+    <!-- Edit Task Fragment -->
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.example.comp3074project.ui.tasks.EditTaskFragment"
+        android:label="Edit Task">
+        <argument
+            android:name="taskId"
+            app:argType="integer" />
     </fragment>
 
     <!-- Courses -->

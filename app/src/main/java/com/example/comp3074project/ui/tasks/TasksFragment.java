@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -52,6 +53,30 @@ public class TasksFragment extends Fragment {
         adapter = new TaskAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
+        // Handles edit & delete
+        adapter.setOnTaskClickListener(new TaskAdapter.OnTaskClickListener() {
+            @Override
+            public void onEdit(TaskEntity task) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("taskId", task.getId()); // pass taskId
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_navigation_tasks_to_editTaskFragment, bundle);
+            }
+
+            @Override
+            public void onDelete(TaskEntity task) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Delete Task")
+                        .setMessage("Are you sure?")
+                        .setPositiveButton("Delete", (dialog, which) -> {
+                            taskViewModel.delete(task);
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+        });
+
+
         tvTotalTasks = view.findViewById(R.id.tvTotalTasks);
 
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
@@ -69,4 +94,6 @@ public class TasksFragment extends Fragment {
             );
         }
     }
+
+
 }

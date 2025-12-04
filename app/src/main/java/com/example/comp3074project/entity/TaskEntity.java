@@ -1,6 +1,7 @@
 package com.example.comp3074project.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tasks")
@@ -18,6 +19,14 @@ public class TaskEntity {
         this.title = title;
         this.description = description;
         this.completed = completed;
+    }
+
+    // Ignore this constructor for Room
+    @Ignore
+    public TaskEntity(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.completed = false;
     }
 
     // Getters and setters

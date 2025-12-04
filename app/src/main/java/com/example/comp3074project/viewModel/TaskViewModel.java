@@ -42,4 +42,8 @@ public class TaskViewModel extends AndroidViewModel {
     public void delete(TaskEntity task) {
         executor.execute(() -> taskDao.delete(task));
     }
+
+    public LiveData<TaskEntity> getTaskById(int id) {
+        return taskDao.getTaskById(id);
+    }
 }
