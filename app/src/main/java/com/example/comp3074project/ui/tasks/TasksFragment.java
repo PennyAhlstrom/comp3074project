@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,6 @@ public class TasksFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_tasks, container, false);
     }
 
@@ -41,27 +41,32 @@ public class TasksFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // --------------------- Floating Add Task Button ---------------------
         FloatingActionButton btnAddTask = view.findViewById(R.id.btn_add_new_task);
         btnAddTask.setOnClickListener(v ->
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_navigation_tasks_to_addTaskFragment)
+                        .navigate(R.id.addTaskFragment) // Navigate directly to AddTaskFragment
         );
 
-        // --------------------- RecyclerView setup ---------------------
         recyclerView = view.findViewById(R.id.recyclerViewTasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new TaskAdapter(new ArrayList<>()); // initially empty
+        adapter = new TaskAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
-        // --------------------- Total tasks TextView ---------------------
         tvTotalTasks = view.findViewById(R.id.tvTotalTasks);
 
-        // --------------------- ViewModel setup ---------------------
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
         taskViewModel.getAllTasks().observe(getViewLifecycleOwner(), tasks -> {
-            adapter.updateTasks(tasks); // update RecyclerView
+            adapter.updateTasks(tasks);
             tvTotalTasks.setText(tasks.size() + " total tasks");
         });
+
+        // "View All" button fix
+        Button btnViewAllTasks = view.findViewById(R.id.btn_tasks_view_all);
+        if (btnViewAllTasks != null) {
+            btnViewAllTasks.setOnClickListener(v ->
+                    Navigation.findNavController(view)
+                            .navigate(R.id.navigation_tasks) // Navigate directly to TasksFragment
+            );
+        }
     }
 }

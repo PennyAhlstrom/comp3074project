@@ -9,7 +9,25 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.comp3074project.ui.home.HomeFragment"
-        android:label="Home" />
+        android:label="Home">
+
+        <!-- Home → Reminders -->
+        <action
+            android:id="@+id/action_home_to_reminders"
+            app:destination="@id/navigation_reminders" />
+        <!-- Home → Tasks -->
+        <action
+            android:id="@+id/action_home_to_tasks"
+            app:destination="@id/navigation_tasks" />
+        <!-- Home → Courses -->
+        <action
+            android:id="@+id/action_home_to_courses"
+            app:destination="@id/navigation_courses" />
+        <!-- Home → Grades -->
+        <action
+            android:id="@+id/action_home_to_grades"
+            app:destination="@id/navigation_grades" />
+    </fragment>
 
     <!-- Reminders -->
     <fragment
@@ -17,16 +35,16 @@
         android:name="com.example.comp3074project.ui.reminders.RemindersFragment"
         android:label="Reminders">
         <action
-            android:id="@+id/action_navigation_reminders_to_addReminderFragment"
-            app:destination="@id/addReminderFragment" />
+            android:id="@+id/action_navigation_reminders_to_addEditReminder"
+            app:destination="@id/addEditReminderFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/addReminderFragment"
-        android:name="com.example.comp3074project.ui.reminders.AddReminderFragment"
-        android:label="Add Reminder">
+        android:id="@+id/addEditReminderFragment"
+        android:name="com.example.comp3074project.ui.reminders.AddEditReminderFragment"
+        android:label="Add/Edit Reminder">
         <action
-            android:id="@+id/action_addReminderFragment_to_navigation_reminders"
+            android:id="@+id/action_addEditReminder_to_navigation_reminders"
             app:destination="@id/navigation_reminders" />
     </fragment>
 

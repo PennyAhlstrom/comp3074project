@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,7 +47,6 @@ public class GradesFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Bind views
         tvGradesSubtitle = view.findViewById(R.id.tvGradesSubtitle);
         tvCourseCode = view.findViewById(R.id.tvCourseCode);
         tvCourseName = view.findViewById(R.id.tvCourseName);
@@ -53,19 +54,24 @@ public class GradesFragment extends Fragment {
         tvWeightedTotal = view.findViewById(R.id.tvWeightedTotal);
         recyclerGrades = view.findViewById(R.id.recyclerGrades);
 
-        // RecyclerView setup
         recyclerGrades.setLayoutManager(new LinearLayoutManager(getContext()));
         gradeAdapter = new GradeAdapter();
         recyclerGrades.setAdapter(gradeAdapter);
 
-        // ViewModel
         gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
-
-        // Observe all grades
         gradeViewModel.getAllGrades().observe(getViewLifecycleOwner(), grades -> {
             updateSummary(grades);
             gradeAdapter.updateGrades(grades);
         });
+
+        // "View All" button fix (if exists on this fragment)
+        Button btnViewAllGrades = view.findViewById(R.id.btn_grades_view_all);
+        if (btnViewAllGrades != null) {
+            btnViewAllGrades.setOnClickListener(v ->
+                    Navigation.findNavController(view)
+                            .navigate(R.id.navigation_grades)
+            );
+        }
     }
 
     private void updateSummary(List<GradeEntity> grades) {
@@ -73,7 +79,6 @@ public class GradesFragment extends Fragment {
         tvGradesSubtitle.setText(count + " recorded grade" + (count != 1 ? "s" : ""));
 
         if (count == 0) {
-            // No grades yet
             tvCourseCode.setText("No course selected");
             tvCourseName.setText("Add a grade to see details");
             tvAverageValue.setText("0%");
@@ -81,13 +86,12 @@ public class GradesFragment extends Fragment {
             return;
         }
 
-        // Use the first grade's course as the current course
         GradeEntity first = grades.get(0);
         tvCourseCode.setText(first.getCourseCode());
         tvCourseName.setText(first.getCourseName());
 
-        double totalWeightedScore = 0.0; // sum(grade * weight)
-        double totalWeight = 0.0;        // sum(weight)
+        double totalWeightedScore = 0.0;
+        double totalWeight = 0.0;
 
         for (GradeEntity g : grades) {
             totalWeightedScore += g.getGrade() * g.getWeight();

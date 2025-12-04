@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,12 +28,8 @@ public class RemindersFragment extends Fragment {
     private ReminderAdapter adapter;
     private TextView tvActiveReminders;
 
-    public RemindersFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reminders, container, false);
     }
@@ -41,34 +38,49 @@ public class RemindersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Set up RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewReminders);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         adapter = new ReminderAdapter();
         recyclerView.setAdapter(adapter);
 
-        // Active reminders count
         tvActiveReminders = view.findViewById(R.id.tvActiveReminders);
 
-        // Initialize ViewModel
         reminderViewModel = new ViewModelProvider(this).get(ReminderViewModel.class);
 
-        // Observe LiveData from ViewModel
+        // Observe LiveData
         reminderViewModel.getAllReminders().observe(getViewLifecycleOwner(), this::updateUI);
 
-        // Add New Reminder button listener
+        // Setup Edit/Delete click handling
+        adapter.setOnReminderClickListener(new ReminderAdapter.OnReminderClickListener() {
+            @Override
+            public void onEdit(ReminderEntity reminder) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("reminder", reminder);
+
+                // Correct action ID from nav_graph.xml
+                NavHostFragment.findNavController(RemindersFragment.this)
+                        .navigate(R.id.action_navigation_reminders_to_addEditReminder, bundle);
+            }
+
+            @Override
+            public void onDelete(ReminderEntity reminder) {
+                reminderViewModel.delete(reminder);
+                Toast.makeText(getContext(), "Reminder deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Add new reminder button
         Button btnAddNewReminder = view.findViewById(R.id.btn_add_new_reminder);
         btnAddNewReminder.setOnClickListener(v ->
                 NavHostFragment.findNavController(this)
-                        .navigate(R.id.action_navigation_reminders_to_addReminderFragment)
+                        .navigate(R.id.addEditReminderFragment)
         );
     }
 
     private void updateUI(List<ReminderEntity> reminders) {
-        // Update RecyclerView
         adapter.setReminders(reminders);
 
-        // Update active reminders count
         if (tvActiveReminders != null) {
             tvActiveReminders.setText(reminders.size() + " active reminder" + (reminders.size() != 1 ? "s" : ""));
         }

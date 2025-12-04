@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,7 @@ public class CoursesFragment extends Fragment {
         FloatingActionButton btnAddCourse = view.findViewById(R.id.btn_add_new_course);
         btnAddCourse.setOnClickListener(v ->
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_navigation_courses_to_addCourseFragment)
+                        .navigate(R.id.addCourseFragment)
         );
 
         recyclerView = view.findViewById(R.id.recyclerViewCourses);
@@ -58,5 +59,14 @@ public class CoursesFragment extends Fragment {
             adapter.updateCourses(courses);
             tvTotalCourses.setText(courses.size() + " enrolled courses");
         });
+
+        // "View All" button fix
+        Button btnViewAllCourses = view.findViewById(R.id.btn_courses_view_all);
+        if (btnViewAllCourses != null) {
+            btnViewAllCourses.setOnClickListener(v ->
+                    Navigation.findNavController(view)
+                            .navigate(R.id.navigation_courses)
+            );
+        }
     }
 }

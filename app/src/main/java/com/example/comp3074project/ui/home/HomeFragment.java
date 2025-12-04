@@ -29,8 +29,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // NavController for navigation actions
-        NavController navController = Navigation.findNavController(view);
+        // Get NavController from the activity's NavHostFragment
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
         // ---------- REMINDERS ----------
         Button btnRemindersViewAll = view.findViewById(R.id.btn_reminders_view_all);
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
 
         Button btnRemindersAddNew = view.findViewById(R.id.btn_reminders_add_new);
         btnRemindersAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.addReminderFragment)
+                navController.navigate(R.id.addEditReminderFragment)
         );
 
         // ---------- TASKS ----------
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
 
         Button btnGradesAddNew = view.findViewById(R.id.btn_grades_add_new);
         btnGradesAddNew.setOnClickListener(v ->
-                navController.navigate(R.id.addGradeFragment) // Updated to navigate to AddGradeFragment
+                navController.navigate(R.id.addGradeFragment)
         );
     }
 }

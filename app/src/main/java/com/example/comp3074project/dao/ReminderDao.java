@@ -2,8 +2,10 @@ package com.example.comp3074project.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.comp3074project.entity.ReminderEntity;
 import java.util.List;
@@ -13,6 +15,12 @@ public interface ReminderDao {
 
     @Insert
     void insert(ReminderEntity reminder);
+
+    @Update
+    void update(ReminderEntity reminder);
+
+    @Delete
+    void delete(ReminderEntity reminder);
 
     @Query("SELECT * FROM reminders ORDER BY alertDate, alertTime")
     LiveData<List<ReminderEntity>> getAllReminders();

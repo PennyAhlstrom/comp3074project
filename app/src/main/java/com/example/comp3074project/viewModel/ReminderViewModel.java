@@ -16,9 +16,9 @@ import java.util.concurrent.Executors;
 
 public class ReminderViewModel extends AndroidViewModel {
 
-    private ReminderDao reminderDao;
-    private LiveData<List<ReminderEntity>> allReminders;
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ReminderDao reminderDao;
+    private final LiveData<List<ReminderEntity>> allReminders;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public ReminderViewModel(@NonNull Application application) {
         super(application);
@@ -33,5 +33,13 @@ public class ReminderViewModel extends AndroidViewModel {
 
     public void insert(ReminderEntity reminder) {
         executor.execute(() -> reminderDao.insert(reminder));
+    }
+
+    public void update(ReminderEntity reminder) {
+        executor.execute(() -> reminderDao.update(reminder));
+    }
+
+    public void delete(ReminderEntity reminder) {
+        executor.execute(() -> reminderDao.delete(reminder));
     }
 }
