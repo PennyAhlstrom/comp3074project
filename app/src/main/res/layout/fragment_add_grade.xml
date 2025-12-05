@@ -67,16 +67,7 @@
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Assessment Name -->
-            <EditText
-                android:id="@+id/inputAssessmentName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Assessment Name (e.g., Midterm Exam)"
-                android:background="@android:color/white"
-                android:padding="12dp"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp" />
+
 
             <!-- Type Spinner -->
             <Spinner

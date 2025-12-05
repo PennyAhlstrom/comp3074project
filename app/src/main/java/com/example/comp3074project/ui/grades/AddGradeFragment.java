@@ -22,7 +22,7 @@ public class AddGradeFragment extends Fragment {
     private GradeViewModel viewModel;
 
     // Predefined assessment types
-    private final String[] gradeTypes = {"Exam", "Quiz", "Project"};
+    private final String[] gradeTypes = {"Assessment Type: ", "Class Work", "Lab", "Assignment", "Midterm Exam", "Final Exam", "Quiz", "Project", "Other"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +51,6 @@ public class AddGradeFragment extends Fragment {
             // Validate required fields
             if (TextUtils.isEmpty(binding.inputCourseCode.getText()) ||
                     TextUtils.isEmpty(binding.inputCourseName.getText()) ||
-                    TextUtils.isEmpty(binding.inputAssessmentName.getText()) ||
                     TextUtils.isEmpty(binding.inputGrade.getText()) ||
                     TextUtils.isEmpty(binding.inputWeight.getText())) {
 
@@ -63,7 +62,6 @@ public class AddGradeFragment extends Fragment {
             GradeEntity grade = new GradeEntity();
             grade.setCourseCode(binding.inputCourseCode.getText().toString().trim());
             grade.setCourseName(binding.inputCourseName.getText().toString().trim());
-            grade.setAssessmentName(binding.inputAssessmentName.getText().toString().trim());
             grade.setGrade(Double.parseDouble(binding.inputGrade.getText().toString().trim()));
             grade.setWeight(Double.parseDouble(binding.inputWeight.getText().toString().trim()));
             grade.setFeedback(binding.inputFeedback.getText().toString().trim());
@@ -80,7 +78,6 @@ public class AddGradeFragment extends Fragment {
             // Clear input fields for next entry
             binding.inputCourseCode.setText("");
             binding.inputCourseName.setText("");
-            binding.inputAssessmentName.setText("");
             binding.inputGrade.setText("");
             binding.inputWeight.setText("");
             binding.inputFeedback.setText("");
