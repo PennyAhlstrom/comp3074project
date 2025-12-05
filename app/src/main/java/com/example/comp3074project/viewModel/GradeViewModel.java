@@ -32,6 +32,11 @@ public class GradeViewModel extends AndroidViewModel {
         return db.gradeDao().getGradesByCourse(courseCode);
     }
 
+    // NEW: fetch a single grade by ID
+    public LiveData<GradeEntity> getGradeById(int gradeId) {
+        return db.gradeDao().getGradeById(gradeId);
+    }
+
     public void insert(GradeEntity grade) {
         executorService.execute(() -> db.gradeDao().insert(grade));
     }

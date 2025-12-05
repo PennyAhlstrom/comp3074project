@@ -19,6 +19,21 @@ public class GradeEntity {
     // NEW: type of assessment (e.g., Exam, Quiz, Project)
     private String type;
 
+    // ---------- Parameterized Constructor ----------
+    public GradeEntity(String courseCode, String courseName, String assessmentName, String type,
+                       double grade, double weight, String feedback) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.assessmentName = assessmentName;
+        this.type = type;
+        this.grade = grade;
+        this.weight = weight;
+        this.feedback = feedback;
+    }
+
+    // ---------- Default constructor (optional but Room can use it) ----------
+    public GradeEntity() {}
+
     // ---------- Getters & Setters ----------
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -41,7 +56,6 @@ public class GradeEntity {
     public String getFeedback() { return feedback; }
     public void setFeedback(String feedback) { this.feedback = feedback; }
 
-    // NEW
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
 }

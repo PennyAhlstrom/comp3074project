@@ -123,22 +123,47 @@
             app:destination="@id/navigation_courses" />
     </fragment>
 
-    <!-- Grades -->
+    <!-- Grades Fragment -->
     <fragment
         android:id="@+id/navigation_grades"
         android:name="com.example.comp3074project.ui.grades.GradesFragment"
         android:label="Grades">
+
+        <!-- Navigate to Add Grade -->
         <action
             android:id="@+id/action_navigation_grades_to_addGradeFragment"
             app:destination="@id/addGradeFragment" />
+
+        <!-- Navigate to Edit Grade -->
+        <action
+            android:id="@+id/action_navigation_grades_to_editGradeFragment"
+            app:destination="@id/editGradeFragment" />
     </fragment>
 
+    <!-- Add Grade Fragment -->
     <fragment
         android:id="@+id/addGradeFragment"
         android:name="com.example.comp3074project.ui.grades.AddGradeFragment"
         android:label="Add Grade">
         <action
             android:id="@+id/action_addGradeFragment_to_navigation_grades"
+            app:destination="@id/navigation_grades" />
+    </fragment>
+
+    <!-- Edit Grade Fragment -->
+    <fragment
+        android:id="@+id/editGradeFragment"
+        android:name="com.example.comp3074project.ui.grades.EditGradeFragment"
+        android:label="Edit Grade">
+
+        <!-- Argument to pass grade ID -->
+        <argument
+            android:name="gradeId"
+            app:argType="integer" />
+
+        <!-- Navigate back to GradesFragment -->
+        <action
+            android:id="@+id/action_editGradeFragment_to_navigation_grades"
             app:destination="@id/navigation_grades" />
     </fragment>
 

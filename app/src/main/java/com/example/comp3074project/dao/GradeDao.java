@@ -28,4 +28,7 @@ public interface GradeDao {
 
     @Query("SELECT * FROM grades WHERE courseCode = :courseCode")
     LiveData<List<GradeEntity>> getGradesByCourse(String courseCode);
+
+    @Query("SELECT * FROM grades WHERE id = :gradeId LIMIT 1")
+    LiveData<GradeEntity> getGradeById(int gradeId);
 }

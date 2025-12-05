@@ -7,4 +7,11 @@
     <string name="title_tasks">Tasks</string>
     <string name="title_courses">Courses</string>
     <string name="title_grades">Grades</string>
+
+    <string-array name="grade_types">
+        <item>Exam</item>
+        <item>Assignment</item>
+        <item>Quiz</item>
+        <item>Project</item>
+    </string-array>
 </resources>

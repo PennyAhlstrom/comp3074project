@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F97316"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:elevation="3dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Grade"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update or delete this assessment grade"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+
+        <!-- Form Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="#FFFFFF"
+            android:elevation="3dp"
+            android:orientation="vertical">
+
+            <!-- Course Code -->
+            <EditText
+                android:id="@+id/inputCourseCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Course Code (e.g., COMP3074)"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Course Name -->
+            <EditText
+                android:id="@+id/inputCourseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Course Name"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Assessment Name -->
+            <EditText
+                android:id="@+id/inputAssessmentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Assessment Name (e.g., Midterm Exam)"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Type Spinner -->
+            <Spinner
+                android:id="@+id/spinnerGradeType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Grade % -->
+            <EditText
+                android:id="@+id/inputGrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Grade (%)"
+                android:inputType="numberDecimal"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Weight % -->
+            <EditText
+                android:id="@+id/inputWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Weight (%)"
+                android:inputType="numberDecimal"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Feedback -->
+            <EditText
+                android:id="@+id/inputFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Feedback (optional)"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Buttons -->
+            <Button
+                android:id="@+id/btnUpdateGrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Grade"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:backgroundTint="#F97316"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnDeleteGrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Grade"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:backgroundTint="#DC2626"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,7 @@ public class GradesFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Bind views
         tvGradesSubtitle = view.findViewById(R.id.tvGradesSubtitle);
         tvCourseCode = view.findViewById(R.id.tvCourseCode);
         tvCourseName = view.findViewById(R.id.tvCourseName);
@@ -55,22 +57,40 @@ public class GradesFragment extends Fragment {
         recyclerGrades = view.findViewById(R.id.recyclerGrades);
 
         recyclerGrades.setLayoutManager(new LinearLayoutManager(getContext()));
-        gradeAdapter = new GradeAdapter();
+
+        // Initialize adapter with Edit and Delete button listeners
+        gradeAdapter = new GradeAdapter(
+                grade -> {
+                    // Navigate to EditGradeFragment with gradeId argument
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("gradeId", grade.getId());
+                    Navigation.findNavController(view)
+                            .navigate(R.id.action_navigation_grades_to_editGradeFragment, bundle);
+                },
+                grade -> {
+                    // Delete grade with ViewModel
+                    gradeViewModel.delete(grade);
+                    Toast.makeText(getContext(), "Grade deleted", Toast.LENGTH_SHORT).show();
+                }
+        );
+
         recyclerGrades.setAdapter(gradeAdapter);
 
+        // Initialize ViewModel and observe LiveData
         gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
         gradeViewModel.getAllGrades().observe(getViewLifecycleOwner(), grades -> {
             updateSummary(grades);
             gradeAdapter.updateGrades(grades);
         });
 
-        // "View All" button fix (if exists on this fragment)
+        // "View All" button scrolls to top
         Button btnViewAllGrades = view.findViewById(R.id.btn_grades_view_all);
         if (btnViewAllGrades != null) {
-            btnViewAllGrades.setOnClickListener(v ->
-                    Navigation.findNavController(view)
-                            .navigate(R.id.navigation_grades)
-            );
+            btnViewAllGrades.setOnClickListener(v -> {
+                if (gradeAdapter.getItemCount() > 0) {
+                    recyclerGrades.scrollToPosition(0);
+                }
+            });
         }
     }
 
@@ -86,10 +106,12 @@ public class GradesFragment extends Fragment {
             return;
         }
 
+        // Use first grade for course info
         GradeEntity first = grades.get(0);
         tvCourseCode.setText(first.getCourseCode());
         tvCourseName.setText(first.getCourseName());
 
+        // Compute weighted average
         double totalWeightedScore = 0.0;
         double totalWeight = 0.0;
 
