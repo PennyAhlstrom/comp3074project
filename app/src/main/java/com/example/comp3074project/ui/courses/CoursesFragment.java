@@ -1,5 +1,6 @@
 package com.example.comp3074project.ui.courses;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class CoursesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Add course FAB
         FloatingActionButton btnAddCourse = view.findViewById(R.id.btn_add_new_course);
         btnAddCourse.setOnClickListener(v ->
                 Navigation.findNavController(view)
@@ -50,17 +52,41 @@ public class CoursesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewCourses);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CourseAdapter(new ArrayList<>());
+
         recyclerView.setAdapter(adapter);
 
         tvTotalCourses = view.findViewById(R.id.tvTotalCourses);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+
         courseViewModel.getAllCourses().observe(getViewLifecycleOwner(), courses -> {
             adapter.updateCourses(courses);
             tvTotalCourses.setText(courses.size() + " enrolled courses");
         });
 
-        // "View All" button fix
+        // Add CRUD listeners
+        adapter.setOnCourseClickListener(new CourseAdapter.OnCourseClickListener() {
+            @Override
+            public void onEdit(CourseEntity course) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("courseId", course.getId());
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.editCourseFragment, bundle);
+            }
+
+            @Override
+            public void onDelete(CourseEntity course) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Delete Course?")
+                        .setMessage("Are you sure you want to delete this course?")
+                        .setPositiveButton("Delete", (dialog, which) ->
+                                courseViewModel.delete(course))
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+        });
+
+        // View All fallback button
         Button btnViewAllCourses = view.findViewById(R.id.btn_courses_view_all);
         if (btnViewAllCourses != null) {
             btnViewAllCourses.setOnClickListener(v ->

@@ -90,9 +90,16 @@
         android:id="@+id/navigation_courses"
         android:name="com.example.comp3074project.ui.courses.CoursesFragment"
         android:label="Courses">
+
+        <!-- Navigate to Add Course -->
         <action
             android:id="@+id/action_navigation_courses_to_addCourseFragment"
             app:destination="@id/addCourseFragment" />
+
+        <!-- Navigate to Edit Course -->
+        <action
+            android:id="@+id/action_navigation_courses_to_editCourseFragment"
+            app:destination="@id/editCourseFragment" />
     </fragment>
 
     <fragment
@@ -101,6 +108,18 @@
         android:label="Add Course">
         <action
             android:id="@+id/action_addCourseFragment_to_navigation_courses"
+            app:destination="@id/navigation_courses" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editCourseFragment"
+        android:name="com.example.comp3074project.ui.courses.EditCourseFragment"
+        android:label="Edit Course">
+        <argument
+            android:name="courseId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editCourseFragment_to_navigation_courses"
             app:destination="@id/navigation_courses" />
     </fragment>
 

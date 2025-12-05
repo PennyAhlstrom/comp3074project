@@ -1,47 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardCourse"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#FFFFFF"
-    android:padding="16dp"
-    android:elevation="2dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/tvCourseName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Course Name"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#111827" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvCourseCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Course Code"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="#7C3AED" />
+        <!-- Course Name -->
+        <TextView
+            android:id="@+id/tvCourseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Course Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#111827" />
 
-    <TextView
-        android:id="@+id/tvInstructor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Instructor: "
-        android:textSize="14sp"
-        android:textColor="#4B5563" />
+        <!-- Course Code -->
+        <TextView
+            android:id="@+id/tvCourseCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Course Code"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#7C3AED" />
 
-    <TextView
-        android:id="@+id/tvSchedule"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Schedule: "
-        android:textSize="14sp"
-        android:textColor="#4B5563" />
-</LinearLayout>
+        <!-- Instructor -->
+        <TextView
+            android:id="@+id/tvInstructor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Instructor:"
+            android:textSize="14sp"
+            android:textColor="#4B5563" />
+
+        <!-- Schedule -->
+        <TextView
+            android:id="@+id/tvSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Schedule:"
+            android:textSize="14sp"
+            android:textColor="#4B5563" />
+
+        <!-- Edit/Delete Buttons (matching task design) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="12dp">
+
+            <ImageButton
+                android:id="@+id/btn_edit_course"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Edit" />
+
+            <ImageButton
+                android:id="@+id/btn_delete_course"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginStart="12dp"
+                android:contentDescription="Delete" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
