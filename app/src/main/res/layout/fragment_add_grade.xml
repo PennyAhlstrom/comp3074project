@@ -45,28 +45,47 @@
             android:elevation="3dp"
             android:orientation="vertical">
 
-            <!-- Course Code -->
-            <EditText
-                android:id="@+id/inputCourseCode"
+            <!-- COURSE SPINNER -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Course Name"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spinnerCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Course Code (e.g., COMP3074)"
-                android:background="@android:color/white"
-                android:padding="12dp"
-                android:textSize="16sp"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Course Name -->
-            <EditText
-                android:id="@+id/inputCourseName"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course Code"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spinnerCourseCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Course Name"
-                android:background="@android:color/white"
-                android:padding="12dp"
-                android:textSize="16sp"
                 android:layout_marginBottom="12dp" />
 
+
+            <!-- Assessment Name (Title Only) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Assessment Name"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp" />
 
 
             <!-- Type Spinner -->
@@ -120,6 +139,18 @@
                 android:textSize="16sp"
                 android:padding="12dp"
                 android:backgroundTint="#F97316"
+                android:textColor="@android:color/white" />
+
+            <!-- DELETE BUTTON -->
+            <Button
+                android:id="@+id/btnDeleteGrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Grade"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#B91C1C"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>

@@ -20,7 +20,7 @@
             android:id="@+id/tvAssessmentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Assessment Name"
+            android:text="Assessment Name: "
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/white" />

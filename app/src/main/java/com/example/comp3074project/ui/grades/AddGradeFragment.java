@@ -2,38 +2,131 @@ package com.example.comp3074project.ui.grades;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.comp3074project.databinding.FragmentAddGradeBinding;
+import com.example.comp3074project.entity.CourseEntity;
 import com.example.comp3074project.entity.GradeEntity;
+import com.example.comp3074project.viewModel.CourseViewModel;
 import com.example.comp3074project.viewModel.GradeViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddGradeFragment extends Fragment {
 
     private FragmentAddGradeBinding binding;
-    private GradeViewModel viewModel;
+    private CourseViewModel courseViewModel;
+    private GradeViewModel gradeViewModel;
 
-    // Predefined assessment types
-    private final String[] gradeTypes = {"Assessment Type: ", "Class Work", "Lab", "Assignment", "Midterm Exam", "Final Exam", "Quiz", "Project", "Other"};
+    private final List<CourseEntity> courseList = new ArrayList<>();
+    private boolean isSyncing = false;      // prevents infinite callback loop
+    private int selectedCourseIndex = -1;
 
+    private final String[] gradeTypes = {
+            "Class Work", "Lab", "Assignment",
+            "Midterm Exam", "Final Exam", "Quiz", "Project", "Other"
+    };
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         binding = FragmentAddGradeBinding.inflate(inflater, container, false);
 
-        viewModel = new ViewModelProvider(this).get(GradeViewModel.class);
+        gradeViewModel  = new ViewModelProvider(this).get(GradeViewModel.class);
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
+        setupCourseSpinners();
         setupTypeSpinner();
         setupSaveButton();
 
+        binding.btnDeleteGrade.setVisibility(View.GONE);   // Not used in Add mode
+
         return binding.getRoot();
+    }
+
+    private void setupCourseSpinners() {
+        courseViewModel.getAllCourses().observe(getViewLifecycleOwner(), courses -> {
+
+            courseList.clear();
+            courseList.addAll(courses);
+
+            if (courseList.isEmpty()) {
+                Toast.makeText(requireContext(), "Please add a course first.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            List<String> names = new ArrayList<>();
+            List<String> codes = new ArrayList<>();
+
+            for (CourseEntity c : courseList) {
+                names.add(c.getName());
+                codes.add(c.getCode());
+            }
+
+            ArrayAdapter<String> nameAdapter = new ArrayAdapter<>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    names
+            );
+            nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            ArrayAdapter<String> codeAdapter = new ArrayAdapter<>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    codes
+            );
+            codeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            binding.spinnerCourse.setAdapter(nameAdapter);
+            binding.spinnerCourseCode.setAdapter(codeAdapter);
+
+            selectedCourseIndex = 0;   // preload first course
+
+            isSyncing = true;
+            binding.spinnerCourse.setSelection(0);
+            binding.spinnerCourseCode.setSelection(0);
+            isSyncing = false;
+
+            binding.spinnerCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                    if (isSyncing) return;
+                    selectedCourseIndex = pos;
+
+                    isSyncing = true;
+                    binding.spinnerCourseCode.setSelection(pos);
+                    isSyncing = false;
+                }
+
+                @Override public void onNothingSelected(AdapterView<?> p) {}
+            });
+
+            binding.spinnerCourseCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                    if (isSyncing) return;
+                    selectedCourseIndex = pos;
+
+                    isSyncing = true;
+                    binding.spinnerCourse.setSelection(pos);
+                    isSyncing = false;
+                }
+
+                @Override public void onNothingSelected(AdapterView<?> p) {}
+            });
+        });
     }
 
     private void setupTypeSpinner() {
@@ -43,50 +136,68 @@ public class AddGradeFragment extends Fragment {
                 gradeTypes
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         binding.spinnerGradeType.setAdapter(adapter);
+        binding.spinnerGradeType.setSelection(0);
     }
 
     private void setupSaveButton() {
         binding.btnSaveGrade.setOnClickListener(v -> {
-            // Validate required fields
-            if (TextUtils.isEmpty(binding.inputCourseCode.getText()) ||
-                    TextUtils.isEmpty(binding.inputCourseName.getText()) ||
-                    TextUtils.isEmpty(binding.inputGrade.getText()) ||
-                    TextUtils.isEmpty(binding.inputWeight.getText())) {
 
-                Toast.makeText(requireContext(), "Please fill in all required fields.", Toast.LENGTH_SHORT).show();
+            if (selectedCourseIndex < 0) {
+                Toast.makeText(requireContext(), "Please select a course.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Create and populate GradeEntity
+            if (isEmpty(binding.inputGrade) || isEmpty(binding.inputWeight)) {
+                Toast.makeText(requireContext(), "Grade and weight are required.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double gradeValue;
+            double weightValue;
+
+            try {
+                gradeValue  = Double.parseDouble(binding.inputGrade.getText().toString().trim());
+                weightValue = Double.parseDouble(binding.inputWeight.getText().toString().trim());
+            } catch (Exception e) {
+                Toast.makeText(requireContext(), "Invalid grade or weight value.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            CourseEntity course = courseList.get(selectedCourseIndex);
+
             GradeEntity grade = new GradeEntity();
-            grade.setCourseCode(binding.inputCourseCode.getText().toString().trim());
-            grade.setCourseName(binding.inputCourseName.getText().toString().trim());
-            grade.setGrade(Double.parseDouble(binding.inputGrade.getText().toString().trim()));
-            grade.setWeight(Double.parseDouble(binding.inputWeight.getText().toString().trim()));
+            grade.setCourseName(course.getName());
+            grade.setCourseCode(course.getCode());
+            grade.setType(binding.spinnerGradeType.getSelectedItem().toString());
+            grade.setGrade(gradeValue);
+            grade.setWeight(weightValue);
             grade.setFeedback(binding.inputFeedback.getText().toString().trim());
 
-            // Set type from Spinner
-            grade.setType(binding.spinnerGradeType.getSelectedItem().toString());
+            gradeViewModel.insert(grade);
+            Toast.makeText(requireContext(), "Grade saved.", Toast.LENGTH_SHORT).show();
 
-            // Insert into database
-            viewModel.insert(grade);
-
-            // Show confirmation Toast
-            Toast.makeText(requireContext(), "Grade saved successfully!", Toast.LENGTH_SHORT).show();
-
-            // Clear input fields for next entry
-            binding.inputCourseCode.setText("");
-            binding.inputCourseName.setText("");
-            binding.inputGrade.setText("");
-            binding.inputWeight.setText("");
-            binding.inputFeedback.setText("");
-
-            // Reset spinner to first option
-            binding.spinnerGradeType.setSelection(0);
-
-            // Focus back to first input
-            binding.inputCourseCode.requestFocus();
+            clearForm();
         });
+    }
+
+    private boolean isEmpty(View view) {
+        return TextUtils.isEmpty(((android.widget.TextView) view).getText());
+    }
+
+    private void clearForm() {
+        binding.inputGrade.setText("");
+        binding.inputWeight.setText("");
+        binding.inputFeedback.setText("");
+        binding.spinnerGradeType.setSelection(0);
+
+        if (!courseList.isEmpty()) {
+            isSyncing = true;
+            binding.spinnerCourse.setSelection(0);
+            binding.spinnerCourseCode.setSelection(0);
+            isSyncing = false;
+            selectedCourseIndex = 0;
+        }
     }
 }

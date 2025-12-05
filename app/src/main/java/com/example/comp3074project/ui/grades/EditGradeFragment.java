@@ -1,164 +1,204 @@
 package com.example.comp3074project.ui.grades;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.comp3074project.R;
+import com.example.comp3074project.databinding.FragmentAddGradeBinding;
+import com.example.comp3074project.entity.CourseEntity;
 import com.example.comp3074project.entity.GradeEntity;
+import com.example.comp3074project.viewModel.CourseViewModel;
 import com.example.comp3074project.viewModel.GradeViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditGradeFragment extends Fragment {
 
+    private FragmentAddGradeBinding binding;
     private GradeViewModel gradeViewModel;
-    private int gradeId;
+    private CourseViewModel courseViewModel;
 
-    private EditText etCourseCode, etCourseName, etAssessmentName, etGrade, etWeight, etFeedback;
-    private Spinner spinnerGradeType;
-    private Button btnUpdateGrade, btnDeleteGrade;
-
-    private GradeEntity currentGrade; // reference to loaded grade
+    private GradeEntity grade;
+    private final List<CourseEntity> courseList = new ArrayList<>();
+    private boolean isSyncing = false;
+    private int selectedCourseIndex = -1;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_grade, container, false);
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        binding = FragmentAddGradeBinding.inflate(inflater, container, false);
 
-        // Bind views
-        etCourseCode = view.findViewById(R.id.inputCourseCode);
-        etCourseName = view.findViewById(R.id.inputCourseName);
-        etAssessmentName = view.findViewById(R.id.inputAssessmentName);
-        spinnerGradeType = view.findViewById(R.id.spinnerGradeType);
-        etGrade = view.findViewById(R.id.inputGrade);
-        etWeight = view.findViewById(R.id.inputWeight);
-        etFeedback = view.findViewById(R.id.inputFeedback);
-        btnUpdateGrade = view.findViewById(R.id.btnUpdateGrade);
-        btnDeleteGrade = view.findViewById(R.id.btnDeleteGrade);
+        gradeViewModel  = new ViewModelProvider(this).get(GradeViewModel.class);
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
-        gradeViewModel = new ViewModelProvider(this).get(GradeViewModel.class);
-
-        // --- Setup spinner adapter safely ---
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                getContext(),
-                R.array.grade_types, // ensure this exists in res/values/strings.xml
-                android.R.layout.simple_spinner_item
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGradeType.setAdapter(adapter);
-
-        // Get gradeId from arguments safely
-        gradeId = getArguments() != null ? getArguments().getInt("gradeId", -1) : -1;
-        if (gradeId == -1) {
-            Toast.makeText(getContext(), "Invalid grade ID", Toast.LENGTH_SHORT).show();
-            NavController navController = Navigation.findNavController(requireView());
-            navController.navigate(R.id.action_editGradeFragment_to_navigation_grades);
-            return;
+        // 🔁 Use plain Bundle instead of EditGradeFragmentArgs
+        int gradeId = -1;
+        if (getArguments() != null) {
+            gradeId = getArguments().getInt("gradeId", -1);
         }
 
-        // Load existing grade safely
-        gradeViewModel.getGradeById(gradeId).observe(getViewLifecycleOwner(), grade -> {
-            if (grade != null) {
-                currentGrade = grade; // keep reference for deletion
+        if (gradeId == -1) {
+            Toast.makeText(requireContext(), "No gradeId passed to EditGradeFragment.", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(requireView()).popBackStack();
+            return binding.getRoot();
+        }
 
-                etCourseCode.setText(grade.getCourseCode());
-                etCourseName.setText(grade.getCourseName());
-                etAssessmentName.setText(grade.getAssessmentName());
-
-                // Set spinner selection safely
-                String type = grade.getType();
-                if (type != null) {
-                    for (int i = 0; i < spinnerGradeType.getCount(); i++) {
-                        if (spinnerGradeType.getItemAtPosition(i).toString().equals(type)) {
-                            spinnerGradeType.setSelection(i);
-                            break;
-                        }
-                    }
-                }
-
-                etGrade.setText(String.valueOf(grade.getGrade()));
-                etWeight.setText(String.valueOf(grade.getWeight()));
-                etFeedback.setText(grade.getFeedback());
+        gradeViewModel.getGradeById(gradeId).observe(getViewLifecycleOwner(), loaded -> {
+            if (loaded != null) {
+                grade = loaded;
+                preloadFields();
+                setupCourseSpinners();
+                setupSaveButton();
+                setupDeleteButton();
             } else {
-                Toast.makeText(getContext(), "Grade not found", Toast.LENGTH_SHORT).show();
-                NavController navController = Navigation.findNavController(requireView());
-                navController.navigate(R.id.action_editGradeFragment_to_navigation_grades);
+                Toast.makeText(requireContext(), "Grade not found.", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(requireView()).popBackStack();
             }
         });
 
-        // Button click listeners
-        btnUpdateGrade.setOnClickListener(v -> updateGrade());
-        btnDeleteGrade.setOnClickListener(v -> deleteGrade());
+        return binding.getRoot();
     }
 
-    // --- Update grade safely ---
-    private void updateGrade() {
-        String courseCode = etCourseCode.getText().toString().trim();
-        String courseName = etCourseName.getText().toString().trim();
-        String assessmentName = etAssessmentName.getText().toString().trim();
-        String gradeStr = etGrade.getText().toString().trim();
-        String weightStr = etWeight.getText().toString().trim();
-        String feedback = etFeedback.getText().toString().trim();
-        String type = spinnerGradeType.getSelectedItem().toString();
-
-        if (courseCode.isEmpty() || courseName.isEmpty() || assessmentName.isEmpty()) {
-            Toast.makeText(getContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (gradeStr.isEmpty() || weightStr.isEmpty()) {
-            Toast.makeText(getContext(), "Grade and Weight must be numbers", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        double gradeValue;
-        double weight;
-        try {
-            gradeValue = Double.parseDouble(gradeStr);
-            weight = Double.parseDouble(weightStr);
-        } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Invalid number format", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        GradeEntity updatedGrade = new GradeEntity(courseCode, courseName, assessmentName, type, gradeValue, weight, feedback);
-        updatedGrade.setId(gradeId);
-
-        gradeViewModel.update(updatedGrade);
-        Toast.makeText(getContext(), "Grade updated", Toast.LENGTH_SHORT).show();
-
-        NavController navController = Navigation.findNavController(requireView());
-        navController.navigate(R.id.action_editGradeFragment_to_navigation_grades);
+    private void preloadFields() {
+        binding.inputGrade.setText(String.valueOf(grade.getGrade()));
+        binding.inputWeight.setText(String.valueOf(grade.getWeight()));
+        binding.inputFeedback.setText(grade.getFeedback());
     }
 
-    // --- Delete grade safely ---
-    private void deleteGrade() {
-        if (currentGrade == null) {
-            Toast.makeText(getContext(), "Cannot delete: grade not loaded", Toast.LENGTH_SHORT).show();
-            return;
+    private void setupCourseSpinners() {
+        courseViewModel.getAllCourses().observe(getViewLifecycleOwner(), courses -> {
+
+            courseList.clear();
+            courseList.addAll(courses);
+
+            if (courseList.isEmpty()) {
+                Toast.makeText(requireContext(), "No courses available.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            List<String> names = new ArrayList<>();
+            List<String> codes = new ArrayList<>();
+
+            for (CourseEntity c : courseList) {
+                names.add(c.getName());
+                codes.add(c.getCode());
+            }
+
+            ArrayAdapter<String> nameAdapter = new ArrayAdapter<>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    names
+            );
+
+            ArrayAdapter<String> codeAdapter = new ArrayAdapter<>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    codes
+            );
+
+            nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            codeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            binding.spinnerCourse.setAdapter(nameAdapter);
+            binding.spinnerCourseCode.setAdapter(codeAdapter);
+
+            // Preselect correct course based on grade’s stored data
+            selectedCourseIndex = findMatchingCourseIndex(grade.getCourseCode(), grade.getCourseName());
+
+            if (selectedCourseIndex < 0) selectedCourseIndex = 0;
+
+            isSyncing = true;
+            binding.spinnerCourse.setSelection(selectedCourseIndex);
+            binding.spinnerCourseCode.setSelection(selectedCourseIndex);
+            isSyncing = false;
+
+            binding.spinnerCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                    if (isSyncing) return;
+                    selectedCourseIndex = pos;
+                    isSyncing = true;
+                    binding.spinnerCourseCode.setSelection(pos);
+                    isSyncing = false;
+                }
+                @Override public void onNothingSelected(AdapterView<?> p) {}
+            });
+
+            binding.spinnerCourseCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                    if (isSyncing) return;
+                    selectedCourseIndex = pos;
+                    isSyncing = true;
+                    binding.spinnerCourse.setSelection(pos);
+                    isSyncing = false;
+                }
+                @Override public void onNothingSelected(AdapterView<?> p) {}
+            });
+        });
+    }
+
+    private int findMatchingCourseIndex(String code, String name) {
+        for (int i = 0; i < courseList.size(); i++) {
+            CourseEntity c = courseList.get(i);
+            if (c.getCode().equals(code) || c.getName().equals(name)) {
+                return i;
+            }
         }
+        return -1;
+    }
 
-        gradeViewModel.delete(currentGrade);
-        Toast.makeText(getContext(), "Grade deleted", Toast.LENGTH_SHORT).show();
+    private void setupSaveButton() {
+        binding.btnSaveGrade.setOnClickListener(v -> {
 
-        NavController navController = Navigation.findNavController(requireView());
-        navController.navigate(R.id.action_editGradeFragment_to_navigation_grades);
+            if (selectedCourseIndex < 0) {
+                Toast.makeText(requireContext(), "Please select a course.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(binding.inputGrade.getText())
+                    || TextUtils.isEmpty(binding.inputWeight.getText())) {
+
+                Toast.makeText(requireContext(), "Grade and Weight are required.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double gradeValue = Double.parseDouble(binding.inputGrade.getText().toString());
+            double weightValue = Double.parseDouble(binding.inputWeight.getText().toString());
+
+            CourseEntity selected = courseList.get(selectedCourseIndex);
+
+            grade.setCourseCode(selected.getCode());
+            grade.setCourseName(selected.getName());
+            grade.setGrade(gradeValue);
+            grade.setWeight(weightValue);
+            grade.setFeedback(binding.inputFeedback.getText().toString());
+
+            gradeViewModel.update(grade);
+            Toast.makeText(requireContext(), "Grade updated.", Toast.LENGTH_SHORT).show();
+
+            Navigation.findNavController(requireView()).popBackStack();
+        });
+    }
+
+    private void setupDeleteButton() {
+        binding.btnDeleteGrade.setOnClickListener(v -> {
+            gradeViewModel.delete(grade);
+            Toast.makeText(requireContext(), "Grade deleted.", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(requireView()).popBackStack();
+        });
     }
 }

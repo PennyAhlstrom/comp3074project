@@ -59,34 +59,51 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.GradeViewHol
     public void onBindViewHolder(@NonNull GradeViewHolder holder, int position) {
         GradeEntity grade = grades.get(position);
 
-        // Set assessment name and grade value
-        holder.tvAssessmentName.setText(grade.getAssessmentName());
+        // Instead of assessmentName, use courseName or type
+        String assessmentDisplay = grade.getType() != null ? grade.getType() : "Assessment";
+        holder.tvAssessmentName.setText(assessmentDisplay);
+
         holder.tvGradeValue.setText(String.format(Locale.getDefault(), "%.1f%%", grade.getGrade()));
 
-        // Type and weight
         String typeText = grade.getType() != null ? grade.getType() : "Assessment";
         holder.tvTypeAndWeight.setText(String.format(Locale.getDefault(),
                 "Type: %s \u2022 Worth %.1f%%", typeText, grade.getWeight()));
 
-        // Feedback
         String feedback = grade.getFeedback();
         holder.tvFeedback.setText((feedback == null || feedback.trim().isEmpty()) ?
                 "Feedback: (none)" : "Feedback: " + feedback);
 
-        // Set edit button click
+        // Edit button
         holder.btnEditGrade.setOnClickListener(v -> {
             if (editListener != null) {
                 editListener.onEditGrade(grade);
             }
         });
 
-        // Set delete button click with confirmation dialog
+        // Delete button with updated text
         holder.btnDeleteGrade.setOnClickListener(v -> {
             if (deleteListener != null) {
                 showDeleteConfirmation(holder.itemView.getContext(), grade);
             }
         });
     }
+
+    // Updated confirmation dialog
+    private void showDeleteConfirmation(Context context, GradeEntity grade) {
+        String displayName = grade.getType() != null ? grade.getType() : "Assessment";
+        new AlertDialog.Builder(context)
+                .setTitle("Delete Grade")
+                .setMessage("Are you sure you want to delete \"" + displayName + "\"?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    if (deleteListener != null) {
+                        deleteListener.onDeleteGrade(grade);
+                        Toast.makeText(context, "Grade deleted", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
 
     @Override
     public int getItemCount() {
@@ -112,19 +129,5 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.GradeViewHol
             btnDeleteGrade = itemView.findViewById(R.id.btn_delete_grade);
         }
     }
-
-    // Show a confirmation dialog before deleting a grade
-    private void showDeleteConfirmation(Context context, GradeEntity grade) {
-        new AlertDialog.Builder(context)
-                .setTitle("Delete Grade")
-                .setMessage("Are you sure you want to delete \"" + grade.getAssessmentName() + "\"?")
-                .setPositiveButton("Delete", (dialog, which) -> {
-                    if (deleteListener != null) {
-                        deleteListener.onDeleteGrade(grade);
-                        Toast.makeText(context, "Grade deleted", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
-    }
 }
+

@@ -11,28 +11,28 @@ public class GradeEntity {
 
     private String courseCode;
     private String courseName;
-    private String assessmentName;
+
+    // Type of assessment (Exam, Quiz, Assignment, etc.)
+    private String type;
+
     private double grade;
     private double weight;
     private String feedback;
 
-    // NEW: type of assessment (e.g., Exam, Quiz, Project)
-    private String type;
+    // ---------- Empty Constructor for Room ----------
+    public GradeEntity() {}
 
-    // ---------- Parameterized Constructor ----------
-    public GradeEntity(String courseCode, String courseName, String assessmentName, String type,
+    // ---------- Optional Convenience Constructor ----------
+    public GradeEntity(String courseCode, String courseName, String type,
                        double grade, double weight, String feedback) {
+
         this.courseCode = courseCode;
         this.courseName = courseName;
-        this.assessmentName = assessmentName;
         this.type = type;
         this.grade = grade;
         this.weight = weight;
         this.feedback = feedback;
     }
-
-    // ---------- Default constructor (optional but Room can use it) ----------
-    public GradeEntity() {}
 
     // ---------- Getters & Setters ----------
     public int getId() { return id; }
@@ -44,8 +44,8 @@ public class GradeEntity {
     public String getCourseName() { return courseName; }
     public void setCourseName(String courseName) { this.courseName = courseName; }
 
-    public String getAssessmentName() { return assessmentName; }
-    public void setAssessmentName(String assessmentName) { this.assessmentName = assessmentName; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
     public double getGrade() { return grade; }
     public void setGrade(double grade) { this.grade = grade; }
@@ -55,7 +55,4 @@ public class GradeEntity {
 
     public String getFeedback() { return feedback; }
     public void setFeedback(String feedback) { this.feedback = feedback; }
-
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
 }
