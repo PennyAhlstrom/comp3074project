@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,4 +77,16 @@ public class HomeFragment extends Fragment {
                 navController.navigate(R.id.addGradeFragment)
         );
     }
+
+    public void scrollToTopOrRefresh() {
+        // Example: scroll a RecyclerView to top if exists
+        // RecyclerView recyclerView = getView().findViewById(R.id.recycler_home);
+        // if (recyclerView != null) recyclerView.smoothScrollToPosition(0);
+
+        // Or just refresh the content
+        // loadHomeData(); // your method to refresh data
+
+        Toast.makeText(getContext(), "Home refreshed!", Toast.LENGTH_SHORT).show();
+    }
+
 }
