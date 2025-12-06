@@ -39,15 +39,58 @@
             android:background="@drawable/edittext_background"
             android:layout_marginBottom="12dp" />
 
-        <EditText
-            android:id="@+id/etSchedule"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Schedule"
-            android:inputType="text"
+            android:text="Schedule:"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:padding="12dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lecture:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/etScheduleDate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="yyyy-mm-dd"
+            android:padding="10dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:inputType="none" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lab:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/etScheduleDate2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="yyyy-mm-dd"
+            android:padding="10dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:inputType="none" />
 
         <Button
             android:id="@+id/btnSaveCourse"

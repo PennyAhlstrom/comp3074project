@@ -56,7 +56,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.tvCourseName.setText(course.getName());
         holder.tvCourseCode.setText(course.getCode());
         holder.tvInstructor.setText("Instructor: " + course.getInstructor());
-        holder.tvSchedule.setText("Schedule: " + course.getSchedule());
+        holder.tvSchedule.setText("Schedule: "
+                + course.getFromDate() + " → " + course.getToDate());
 
         // Attach edit/delete click events
         holder.btnEditCourse.setOnClickListener(v -> {

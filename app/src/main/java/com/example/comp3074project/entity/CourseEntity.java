@@ -12,17 +12,20 @@ public class CourseEntity {
     private String name;
     private String code;
     private String instructor;
-    private String schedule;
 
-    // Constructor
-    public CourseEntity(String name, String code, String instructor, String schedule) {
+    // NEW FIELDS
+    private String fromDate;
+    private String toDate;
+
+    public CourseEntity(String name, String code, String instructor, String fromDate, String toDate) {
         this.name = name;
         this.code = code;
         this.instructor = instructor;
-        this.schedule = schedule;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
 
-    // Getters and setters
+    // Getters & setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -35,6 +38,9 @@ public class CourseEntity {
     public String getInstructor() { return instructor; }
     public void setInstructor(String instructor) { this.instructor = instructor; }
 
-    public String getSchedule() { return schedule; }
-    public void setSchedule(String schedule) { this.schedule = schedule; }
+    public String getFromDate() { return fromDate; }
+    public void setFromDate(String fromDate) { this.fromDate = fromDate; }
+
+    public String getToDate() { return toDate; }
+    public void setToDate(String toDate) { this.toDate = toDate; }
 }
