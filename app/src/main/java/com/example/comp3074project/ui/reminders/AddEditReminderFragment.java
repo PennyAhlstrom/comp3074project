@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -93,12 +94,46 @@ public class AddEditReminderFragment extends Fragment {
 
     private void setupTaskDropdown() {
         taskViewModel.getAllTasks().observe(getViewLifecycleOwner(), tasks -> {
-            List<String> taskTitles = new ArrayList<>();
-            for (TaskEntity task : tasks) {
-                taskTitles.add(task.getTitle());
+
+            // No tasks available → show placeholder + block selection
+            if (tasks == null || tasks.isEmpty()) {
+                List<String> placeholder = new ArrayList<>();
+                placeholder.add("No tasks available - please add a task first");
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        placeholder
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerTask.setAdapter(adapter);
+
+                spinnerTask.setOnTouchListener((v, event) -> {
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        Toast.makeText(
+                                requireContext(),
+                                "You must add at least one task before assigning it to a reminder.",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                    return true; // Prevent opening dropdown
+                });
+
+                selectedTaskId = null;
+                return;
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
-                    android.R.layout.simple_spinner_item, taskTitles);
+
+            // Tasks exist → normal behavior
+            List<String> taskTitles = new ArrayList<>();
+            for (TaskEntity t : tasks) {
+                taskTitles.add(t.getTitle());
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    taskTitles
+            );
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerTask.setAdapter(adapter);
 
@@ -112,7 +147,7 @@ public class AddEditReminderFragment extends Fragment {
                 public void onNothingSelected(android.widget.AdapterView<?> parent) {}
             });
 
-            // Pre-select current task if editing
+            // Pre-select when editing
             if (editingReminder != null && editingReminder.getTaskId() != null) {
                 for (int i = 0; i < tasks.size(); i++) {
                     if (Objects.equals(tasks.get(i).getId(), editingReminder.getTaskId())) {

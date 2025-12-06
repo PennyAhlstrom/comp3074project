@@ -22,10 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Find the BottomNavigationView
         bottomNavigationView = findViewById(R.id.nav_view);
 
-        // Find the NavHostFragment and NavController
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.nav_host_fragment);
@@ -36,19 +34,25 @@ public class MainActivity extends AppCompatActivity {
 
         navController = navHostFragment.getNavController();
 
-        // Connect BottomNavigationView with NavController for normal navigation
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        // Handle reselection of the same item (e.g., scroll/refresh Home)
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+
+            if (handled && item.getItemId() == R.id.navigation_home) {
+                navController.popBackStack(R.id.navigation_home, false);
+            }
+
+            return handled;
+        });
+
         bottomNavigationView.setOnItemReselectedListener(item -> {
             if (item.getItemId() == R.id.navigation_home) {
-                // Get the currently displayed fragment reliably
                 Fragment currentFragment = navHostFragment
                         .getChildFragmentManager()
                         .getPrimaryNavigationFragment();
 
                 if (currentFragment instanceof HomeFragment) {
-                    // Call HomeFragment's method to scroll or refresh
                     ((HomeFragment) currentFragment).scrollToTopOrRefresh();
                 }
             }
