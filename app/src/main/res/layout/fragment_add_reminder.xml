@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:paddingBottom="16dp">
+        android:paddingBottom="95dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,7 +175,8 @@
                         android:textAllCaps="false"
                         android:textStyle="bold"
                         android:backgroundTint="#BDE8FF"
-                        android:textColor="#1E2840" />
+                        android:textColor="#1E2840"/>
+
 
                     <Space
                         android:layout_width="16dp"
@@ -190,7 +191,7 @@
                         android:textAllCaps="false"
                         android:textStyle="bold"
                         android:backgroundTint="#C8F574"
-                        android:textColor="#1E2840" />
+                        android:textColor="#1E2840"/>
                 </LinearLayout>
 
             </LinearLayout>
