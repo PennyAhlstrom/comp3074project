@@ -13,16 +13,24 @@ public class CourseEntity {
     private String code;
     private String instructor;
 
-    // NEW FIELDS
+    // Existing date fields
     private String fromDate;
     private String toDate;
 
-    public CourseEntity(String name, String code, String instructor, String fromDate, String toDate) {
+    // NEW: time fields
+    private String lectureTime;
+    private String labTime;
+
+    // Updated constructor
+    public CourseEntity(String name, String code, String instructor, String fromDate, String toDate,
+                        String lectureTime, String labTime) {
         this.name = name;
         this.code = code;
         this.instructor = instructor;
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.lectureTime = lectureTime;
+        this.labTime = labTime;
     }
 
     // Getters & setters
@@ -43,4 +51,10 @@ public class CourseEntity {
 
     public String getToDate() { return toDate; }
     public void setToDate(String toDate) { this.toDate = toDate; }
+
+    public String getLectureTime() { return lectureTime; }
+    public void setLectureTime(String lectureTime) { this.lectureTime = lectureTime; }
+
+    public String getLabTime() { return labTime; }
+    public void setLabTime(String labTime) { this.labTime = labTime; }
 }

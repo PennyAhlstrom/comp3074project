@@ -1,6 +1,7 @@
 package com.example.comp3074project.ui.courses;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,8 @@ public class EditCourseFragment extends Fragment {
     private EditText etInstructor;
     private EditText etFromDate;
     private EditText etToDate;
+    private EditText etLectureTime;
+    private EditText etLabTime;
 
     private Button btnUpdateCourse;
     private Button btnDeleteCourse;
@@ -53,6 +57,8 @@ public class EditCourseFragment extends Fragment {
         etInstructor = view.findViewById(R.id.etInstructor);
         etFromDate = view.findViewById(R.id.etScheduleDate);
         etToDate = view.findViewById(R.id.etScheduleDate2);
+        etLectureTime = view.findViewById(R.id.LectureTime);
+        etLabTime = view.findViewById(R.id.LabTime);
 
         btnUpdateCourse = view.findViewById(R.id.btnUpdateCourse);
         btnDeleteCourse = view.findViewById(R.id.btnDeleteCourse);
@@ -63,7 +69,7 @@ public class EditCourseFragment extends Fragment {
             courseId = getArguments().getInt("courseId");
         }
 
-        // Load course information
+        // Load course data
         courseViewModel.getCourseById(courseId).observe(getViewLifecycleOwner(), course -> {
             if (course != null) {
                 etCourseName.setText(course.getName());
@@ -71,12 +77,18 @@ public class EditCourseFragment extends Fragment {
                 etInstructor.setText(course.getInstructor());
                 etFromDate.setText(course.getFromDate());
                 etToDate.setText(course.getToDate());
+                etLectureTime.setText(course.getLectureTime());
+                etLabTime.setText(course.getLabTime());
             }
         });
 
         // Date pickers
         etFromDate.setOnClickListener(v -> showDatePicker(etFromDate));
         etToDate.setOnClickListener(v -> showDatePicker(etToDate));
+
+        // Time pickers
+        etLectureTime.setOnClickListener(v -> showTimePicker(etLectureTime));
+        etLabTime.setOnClickListener(v -> showTimePicker(etLabTime));
 
         btnUpdateCourse.setOnClickListener(v -> updateCourse(view));
         btnDeleteCourse.setOnClickListener(v -> deleteCourse(view));
@@ -88,14 +100,17 @@ public class EditCourseFragment extends Fragment {
         String instructor = etInstructor.getText().toString().trim();
         String fromDate = etFromDate.getText().toString().trim();
         String toDate = etToDate.getText().toString().trim();
+        String lectureTime = etLectureTime.getText().toString().trim();
+        String labTime = etLabTime.getText().toString().trim();
 
         if (name.isEmpty() || code.isEmpty() || instructor.isEmpty() ||
-                fromDate.isEmpty() || toDate.isEmpty()) {
+                fromDate.isEmpty() || toDate.isEmpty() ||
+                lectureTime.isEmpty() || labTime.isEmpty()) {
             Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        CourseEntity updatedCourse = new CourseEntity(name, code, instructor, fromDate, toDate);
+        CourseEntity updatedCourse = new CourseEntity(name, code, instructor, fromDate, toDate, lectureTime, labTime);
         updatedCourse.setId(courseId);
 
         courseViewModel.update(updatedCourse);
@@ -112,7 +127,9 @@ public class EditCourseFragment extends Fragment {
                 etCourseCode.getText().toString(),
                 etInstructor.getText().toString(),
                 etFromDate.getText().toString(),
-                etToDate.getText().toString()
+                etToDate.getText().toString(),
+                etLectureTime.getText().toString(),
+                etLabTime.getText().toString()
         );
         toDelete.setId(courseId);
 
@@ -132,11 +149,22 @@ public class EditCourseFragment extends Fragment {
 
         DatePickerDialog dialog = new DatePickerDialog(
                 getContext(),
-                (DatePicker dp, int y, int m, int d) -> {
-                    String date = String.format("%04d-%02d-%02d", y, m + 1, d);
-                    targetField.setText(date);
-                },
+                (DatePicker dp, int y, int m, int d) -> targetField.setText(String.format("%04d-%02d-%02d", y, m + 1, d)),
                 year, month, day
+        );
+
+        dialog.show();
+    }
+
+    private void showTimePicker(EditText targetField) {
+        final Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog dialog = new TimePickerDialog(
+                getContext(),
+                (TimePicker tp, int h, int m) -> targetField.setText(String.format("%02d:%02d", h, m)),
+                hour, minute, true
         );
 
         dialog.show();

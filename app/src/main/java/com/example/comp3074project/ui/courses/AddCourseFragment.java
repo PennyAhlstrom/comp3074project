@@ -1,6 +1,7 @@
 package com.example.comp3074project.ui.courses;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,16 +45,20 @@ public class AddCourseFragment extends Fragment {
         EditText etInstructor = view.findViewById(R.id.etInstructor);
         EditText etScheduleDate = view.findViewById(R.id.etScheduleDate);
         EditText etScheduleDate2 = view.findViewById(R.id.etScheduleDate2);
+        EditText etLectureTime = view.findViewById(R.id.LectureTime);
+        EditText etLabTime = view.findViewById(R.id.LabTime);
 
         Button btnSaveCourse = view.findViewById(R.id.btnSaveCourse);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
-        // SHOW DATE PICKER FOR "FROM" DATE
+        // Date pickers
         etScheduleDate.setOnClickListener(v -> showDatePicker(etScheduleDate));
-
-        // SHOW DATE PICKER FOR "TO" DATE
         etScheduleDate2.setOnClickListener(v -> showDatePicker(etScheduleDate2));
+
+        // Time pickers
+        etLectureTime.setOnClickListener(v -> showTimePicker(etLectureTime));
+        etLabTime.setOnClickListener(v -> showTimePicker(etLabTime));
 
         btnSaveCourse.setOnClickListener(v -> {
             String name = etCourseName.getText().toString().trim();
@@ -60,14 +66,17 @@ public class AddCourseFragment extends Fragment {
             String instructor = etInstructor.getText().toString().trim();
             String fromDate = etScheduleDate.getText().toString().trim();
             String toDate = etScheduleDate2.getText().toString().trim();
+            String lectureTime = etLectureTime.getText().toString().trim();
+            String labTime = etLabTime.getText().toString().trim();
 
             if (name.isEmpty() || code.isEmpty() || instructor.isEmpty() ||
-                    fromDate.isEmpty() || toDate.isEmpty()) {
+                    fromDate.isEmpty() || toDate.isEmpty() ||
+                    lectureTime.isEmpty() || labTime.isEmpty()) {
                 Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            CourseEntity course = new CourseEntity(name, code, instructor, fromDate, toDate);
+            CourseEntity course = new CourseEntity(name, code, instructor, fromDate, toDate, lectureTime, labTime);
             courseViewModel.insert(course);
 
             Toast.makeText(getContext(), "Course added", Toast.LENGTH_SHORT).show();
@@ -94,5 +103,22 @@ public class AddCourseFragment extends Fragment {
         );
 
         datePickerDialog.show();
+    }
+
+    private void showTimePicker(EditText targetField) {
+        final Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getContext(),
+                (TimePicker tp, int h, int m) -> {
+                    String time = String.format("%02d:%02d", h, m);
+                    targetField.setText(time);
+                },
+                hour, minute, true
+        );
+
+        timePickerDialog.show();
     }
 }
