@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Course Name -->
         <EditText
             android:id="@+id/etCourseName"
             android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             android:background="@drawable/edittext_background"
             android:layout_marginBottom="12dp" />
 
+        <!-- Course Code -->
         <EditText
             android:id="@+id/etCourseCode"
             android:layout_width="match_parent"
@@ -29,6 +31,7 @@
             android:background="@drawable/edittext_background"
             android:layout_marginBottom="12dp" />
 
+        <!-- Instructor -->
         <EditText
             android:id="@+id/etInstructor"
             android:layout_width="match_parent"
@@ -39,12 +42,54 @@
             android:background="@drawable/edittext_background"
             android:layout_marginBottom="12dp" />
 
+        <!-- From Date -->
         <EditText
-            android:id="@+id/etSchedule"
+            android:id="@+id/etScheduleDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Schedule"
-            android:inputType="text"
+            android:hint="From Date"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
+
+        <!-- To Date -->
+        <EditText
+            android:id="@+id/etScheduleDate2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To Date"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Lecture Time -->
+        <EditText
+            android:id="@+id/LectureTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lecture Time"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Lab Time -->
+        <EditText
+            android:id="@+id/LabTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lab Time"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
             android:padding="12dp"
             android:background="@drawable/edittext_background"
             android:layout_marginBottom="16dp" />
