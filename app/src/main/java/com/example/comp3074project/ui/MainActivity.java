@@ -22,37 +22,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Find the BottomNavigationView
         bottomNavigationView = findViewById(R.id.nav_view);
 
+        // Find the NavHostFragment and NavController
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.nav_host_fragment);
 
         if (navHostFragment == null) {
-            throw new IllegalStateException("NavHostFragment with id R.id.nav_host_fragment not found");
+            throw new IllegalStateException("NavHostFragment not found");
         }
 
         navController = navHostFragment.getNavController();
 
-        // Connect BottomNavigationView with NavController
+        // Connect BottomNavigationView with NavController for normal navigation
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        // Handle reselecting the same item
+        // Handle reselection of the same item (e.g., scroll/refresh Home)
         bottomNavigationView.setOnItemReselectedListener(item -> {
             if (item.getItemId() == R.id.navigation_home) {
-                // Try to get the current fragment
-                Fragment currentFragment = getSupportFragmentManager()
-                        .findFragmentById(R.id.nav_host_fragment)
+                // Get the currently displayed fragment reliably
+                Fragment currentFragment = navHostFragment
                         .getChildFragmentManager()
-                        .getFragments()
-                        .get(0);
+                        .getPrimaryNavigationFragment();
 
                 if (currentFragment instanceof HomeFragment) {
-                    // Call a method in HomeFragment to refresh or scroll to top
+                    // Call HomeFragment's method to scroll or refresh
                     ((HomeFragment) currentFragment).scrollToTopOrRefresh();
-                } else {
-                    // Navigate explicitly to HomeFragment if not already there
-                    navController.navigate(R.id.navigation_home);
                 }
             }
         });

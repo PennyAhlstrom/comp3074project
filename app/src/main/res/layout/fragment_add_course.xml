@@ -2,128 +2,163 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="0dp"> <!-- Remove ScrollView padding to let header touch edges -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etCourseName"
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#8B5CF6"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvAddCourseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Course"
+                android:textColor="@android:color/white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Form Content -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Course Name"
-            android:inputType="textPersonName"
-            android:padding="12dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="12dp" />
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:paddingBottom="80dp"> <!--- extra space for bottom nav -->>
 
-        <EditText
-            android:id="@+id/etCourseCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Course Code"
-            android:inputType="text"
-            android:padding="12dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="12dp" />
+            <EditText
+                android:id="@+id/etCourseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Course Name"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="12dp" />
 
-        <EditText
-            android:id="@+id/etInstructor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Instructor"
-            android:inputType="textPersonName"
-            android:padding="12dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="12dp" />
+            <EditText
+                android:id="@+id/etCourseCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Course Code"
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Schedule:"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp" />
+            <EditText
+                android:id="@+id/etInstructor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Instructor"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lecture:"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Schedule:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp" />
 
-        <EditText
-            android:id="@+id/etScheduleDate"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="yyyy-mm-dd"
-            android:padding="10dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false"
-            android:inputType="none" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lecture:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp" />
 
-        <EditText
-            android:id="@+id/LectureTime"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="--:--"
-            android:padding="10dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false"
-            android:inputType="none" />
+            <EditText
+                android:id="@+id/etScheduleDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="yyyy-mm-dd"
+                android:padding="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:inputType="none" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lab:"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp" />
+            <EditText
+                android:id="@+id/LectureTime"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="--:--"
+                android:padding="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:inputType="none" />
 
-        <EditText
-            android:id="@+id/etScheduleDate2"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="yyyy-mm-dd"
-            android:padding="10dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false"
-            android:inputType="none" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lab:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp" />
 
-        <EditText
-            android:id="@+id/LabTime"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
-            android:background="@android:drawable/edit_text"
-            android:hint="--:--"
-            android:padding="10dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false"
-            android:inputType="none" />
+            <EditText
+                android:id="@+id/etScheduleDate2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="yyyy-mm-dd"
+                android:padding="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:inputType="none" />
 
-        <Button
-            android:id="@+id/btnSaveCourse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Course"
-            android:backgroundTint="#8B5CF6"
-            android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/LabTime"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="--:--"
+                android:padding="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:inputType="none" />
+
+            <Button
+                android:id="@+id/btnSaveCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Course"
+                android:backgroundTint="#8B5CF6"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="80dp" /> <!-- space above bottom nav -->
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
